@@ -1,0 +1,37 @@
+{
+	"$schema": "https://shadcn-svelte.com/schema/registry-item.json",
+	"name": "dock",
+	"title": "Dock",
+	"type": "registry:ui",
+	"description": "A macOS-style interactive dock with proximity scaling items.",
+	"dependencies": [
+		"clsx",
+		"tailwind-merge"
+	],
+	"meta": {
+		"source": "https://github.com/nolly-studio/cult-ui",
+		"port": "svelte-5"
+	},
+	"files": [
+		{
+			"content": "<script lang=\"ts\">\n\timport { setContext } from 'svelte';\n\timport { cn } from '$UTILS$/cn';\n\n\tinterface DockContext {\n\t\tget mouseX(): number;\n\t\tget hovered(): boolean;\n\t\tget animatingIndexes(): number[];\n\t\tsetAnimatingIndexes(indexes: number[]): void;\n\t}\n\n\tlet {\n\t\tclass: className = '',\n\t\tchildren,\n\t}: {\n\t\tclass?: string;\n\t\tchildren?: import('svelte').Snippet;\n\t} = $props();\n\n\tlet dockEl = $state<HTMLDivElement>();\n\tlet hovered = $state(false);\n\tlet mouseX = $state(Infinity);\n\tlet animatingIndexes = $state<number[]>([]);\n\n\tfunction setAnimatingIndexes(indexes: number[]) {\n\t\tanimatingIndexes = indexes;\n\t}\n\n\tfunction handleMouseMove(e: MouseEvent) {\n\t\tmouseX = e.pageX;\n\t\tif (!hovered) hovered = true;\n\t}\n\n\tfunction handleMouseLeave() {\n\t\tmouseX = Infinity;\n\t\thovered = false;\n\t}\n\n\tsetContext<DockContext>('dock', {\n\t\tget mouseX() {\n\t\t\treturn mouseX;\n\t\t},\n\t\tget hovered() {\n\t\t\treturn hovered;\n\t\t},\n\t\tget animatingIndexes() {\n\t\t\treturn animatingIndexes;\n\t\t},\n\t\tsetAnimatingIndexes,\n\t});\n</script>\n\n<div\n\tbind:this={dockEl}\n\trole=\"group\"\n\tclass={cn(\n\t\t'absolute bottom-4 left-1/2 -translate-x-1/2 flex items-end h-14 p-2 gap-3 rounded-xl bg-opacity-90',\n\t\t'dark:bg-neutral-900 bg-neutral-50 shadow-sm transition-colors hover:bg-neutral-100 dark:hover:bg-neutral-800/80',\n\t\t'shadow-[0px_1px_1px_0px_rgba(0,0,0,0.05),0px_1px_1px_0px_rgba(255,252,240,0.5)_inset,0px_0px_0px_1px_hsla(0,0%,100%,0.1)_inset,0px_0px_1px_0px_rgba(28,27,26,0.5)]',\n\t\t'shadow-[rgba(17,24,28,0.08)_0_0_0_1px,rgba(17,24,28,0.08)_0_1px_2px_-1px,rgba(17,24,28,0.04)_0_2px_4px]',\n\t\t'dark:shadow-[0_1px_0_0_rgba(255,255,255,0.03)_inset,0_0_0_1px_rgba(255,255,255,0.03)_inset,0_0_0_1px_rgba(0,0,0,0.1),0_2px_2px_0_rgba(0,0,0,0.1),0_4px_4px_0_rgba(0,0,0,0.1),0_8px_8px_0_rgba(0,0,0,0.1)]',\n\t\tclassName\n\t)}\n\tonmousemove={handleMouseMove}\n\tonmouseleave={handleMouseLeave}\n>\n\t{#if children}\n\t\t{@render children()}\n\t{/if}\n</div>\n",
+			"type": "registry:component",
+			"target": "ui/dock.svelte"
+		},
+		{
+			"content": "<script lang=\"ts\">\n\timport { getContext, type Snippet } from 'svelte';\n\timport { cn } from '$UTILS$/cn';\n\n\tinterface DockContext {\n\t\treadonly mouseX: number;\n\t\treadonly hovered: boolean;\n\t\treadonly animatingIndexes: number[];\n\t\tsetAnimatingIndexes(indexes: number[]): void;\n\t}\n\n\tlet {\n\t\tid,\n\t\tclass: className = '',\n\t\tchildren,\n\t}: {\n\t\tid: number;\n\t\tclass?: string;\n\t\tchildren?: Snippet;\n\t} = $props();\n\n\tconst dock = getContext<DockContext>('dock');\n\n\tlet itemEl = $state<HTMLButtonElement>();\n\tlet elCenterX = $state(0);\n\tlet isAnimating = $state(false);\n\n\t// Proximity-based scale: items grow as mouse approaches their center\n\tlet scale = $derived.by(() => {\n\t\tif (!dock.hovered || dock.mouseX === Infinity || elCenterX === 0) return 1;\n\t\t// Use pageX from dock; compute distance from mouse to this item's center\n\t\tconst distance = Math.abs(dock.mouseX - elCenterX);\n\t\tif (distance > 160) return 1;\n\t\t// Cosine curve: peaks at center, falls off smoothly\n\t\t// cos((0/160)*PI/2) = cos(0) = 1 => 1 + 0.5 = 1.5\n\t\t// cos((160/160)*PI/2) = cos(PI/2) ≈ 0 => 1 + 0 = 1\n\t\treturn 1 + 0.5 * Math.cos((distance / 160) * (Math.PI / 2));\n\t});\n\n\tfunction handleClick() {\n\t\tisAnimating = !isAnimating;\n\t\tif (isAnimating) {\n\t\t\tdock.setAnimatingIndexes([...dock.animatingIndexes, id]);\n\t\t} else {\n\t\t\tdock.setAnimatingIndexes(dock.animatingIndexes.filter((i) => i !== id));\n\t\t}\n\t}\n\n\t// Recalculate center X on mount and on resize\n\t$effect(() => {\n\t\tif (!itemEl) return;\n\t\tconst el = itemEl;\n\t\tfunction updateCenter() {\n\t\t\tconst rect = el.getBoundingClientRect();\n\t\t\t// getBoundingClientRect accounts for parent transforms, but we need\n\t\t\t// page-relative X. The dock uses pageX, so add window.scrollX.\n\t\t\telCenterX = rect.x + window.scrollX + rect.width / 2;\n\t\t}\n\t\tupdateCenter();\n\t\twindow.addEventListener('resize', updateCenter);\n\t\treturn () => {\n\t\t\twindow.removeEventListener('resize', updateCenter);\n\t\t};\n\t});\n</script>\n\n<div class=\"flex flex-col items-center gap-1\">\n\t<!-- svelte-ignore a11y_no_static_element_interactions -->\n\t<button\n\t\tbind:this={itemEl}\n\t\tclass={cn(\n\t\t\t'rounded-lg border aspect-square dark:border-white/5 border-black/5 border-opacity-10',\n\t\t\t'dark:bg-neutral-800 bg-neutral-100 saturate-90 brightness-90',\n\t\t\t'hover:saturate-100 hover:brightness-112',\n\t\t\t'active:scale-[0.95]',\n\t\t\t'will-change-transform',\n\t\t\tisAnimating && 'dock-bouncing',\n\t\t\tclassName\n\t\t)}\n\t\tstyle=\"scale: {scale}\"\n\t\tonclick={handleClick}\n\t>\n\t\t{#if children}\n\t\t\t{@render children()}\n\t\t{/if}\n\t</button>\n\t{#if dock.animatingIndexes.includes(id)}\n\t\t<div class=\"w-1.5 h-1.5 rounded-full dark:bg-white bg-black\"></div>\n\t{/if}\n</div>\n\n<style>\n\t.dock-bouncing {\n\t\tanimation: dock-bounce 0.5s ease-in-out infinite;\n\t}\n\n\t@keyframes dock-bounce {\n\t\t0%,\n\t\t100% {\n\t\t\ttransform: translateY(0);\n\t\t}\n\t\t50% {\n\t\t\ttransform: translateY(-24px);\n\t\t}\n\t}\n</style>\n",
+			"type": "registry:component",
+			"target": "ui/dock-item.svelte"
+		},
+		{
+			"content": "import { clsx, type ClassValue } from 'clsx';\nimport { twMerge } from 'tailwind-merge';\n\nexport function cn(...inputs: ClassValue[]) {\n\treturn twMerge(clsx(inputs));\n}\n",
+			"type": "registry:lib",
+			"target": "utils/cn.ts"
+		},
+		{
+			"content": "@keyframes cosmic-spin {\n\tfrom { transform: rotate(0deg); }\n\tto { transform: rotate(360deg); }\n}\n\n@keyframes cosmic-spin-slow {\n\tfrom { transform: rotate(0deg); }\n\tto { transform: rotate(-360deg); }\n}\n\n@keyframes cult-shimmer {\n\t0% { background-position: 0% 50%; }\n\t50% { background-position: 100% 50%; }\n\t100% { background-position: 0% 50%; }\n}\n\n@utility animate-cosmic-spin {\n\tanimation: cosmic-spin 3s linear infinite;\n}\n\n@utility animate-cosmic-spin-slow {\n\tanimation: cosmic-spin-slow 5s linear infinite;\n}\n\n@utility animate-cult-shimmer {\n\tanimation: cult-shimmer 8s ease infinite;\n}\n",
+			"type": "registry:file",
+			"target": "cult-ui-styles.css"
+		}
+	]
+}

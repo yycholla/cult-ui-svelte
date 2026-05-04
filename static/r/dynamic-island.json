@@ -1,0 +1,32 @@
+{
+	"$schema": "https://shadcn-svelte.com/schema/registry-item.json",
+	"name": "dynamic-island",
+	"title": "Dynamic Island",
+	"type": "registry:ui",
+	"description": "An interactive dynamic-island-style container with size presets.",
+	"dependencies": [
+		"clsx",
+		"tailwind-merge"
+	],
+	"meta": {
+		"source": "https://github.com/nolly-studio/cult-ui",
+		"port": "svelte-5"
+	},
+	"files": [
+		{
+			"content": "<script lang=\"ts\">\n\timport { onMount } from 'svelte';\n\timport type { Snippet } from 'svelte';\n\timport { cn } from '$UTILS$/cn';\n\n\tconst MIN_WIDTH = 691;\n\tconst MAX_HEIGHT_MOBILE_ULTRA = 400;\n\tconst MAX_HEIGHT_MOBILE_MASSIVE = 700;\n\n\texport type SizePreset =\n\t\t| 'reset'\n\t\t| 'empty'\n\t\t| 'default'\n\t\t| 'compact'\n\t\t| 'compactLong'\n\t\t| 'large'\n\t\t| 'long'\n\t\t| 'minimalLeading'\n\t\t| 'minimalTrailing'\n\t\t| 'compactMedium'\n\t\t| 'medium'\n\t\t| 'tall'\n\t\t| 'ultra'\n\t\t| 'massive';\n\n\tinterface Preset {\n\t\twidth: number;\n\t\theight?: number;\n\t\taspectRatio: number;\n\t\tborderRadius: number;\n\t}\n\n\tconst SIZE_PRESETS: Record<SizePreset, Preset> = {\n\t\treset: { width: 150, aspectRatio: 1, borderRadius: 20 },\n\t\tempty: { width: 0, aspectRatio: 0, borderRadius: 0 },\n\t\tdefault: { width: 150, aspectRatio: 44 / 150, borderRadius: 46 },\n\t\tminimalLeading: { width: 52.33, aspectRatio: 44 / 52.33, borderRadius: 22 },\n\t\tminimalTrailing: { width: 52.33, aspectRatio: 44 / 52.33, borderRadius: 22 },\n\t\tcompact: { width: 235, aspectRatio: 44 / 235, borderRadius: 46 },\n\t\tcompactLong: { width: 300, aspectRatio: 44 / 235, borderRadius: 46 },\n\t\tcompactMedium: { width: 351, aspectRatio: 64 / 371, borderRadius: 44 },\n\t\tlong: { width: 371, aspectRatio: 84 / 371, borderRadius: 42 },\n\t\tmedium: { width: 371, aspectRatio: 210 / 371, borderRadius: 22 },\n\t\tlarge: { width: 371, aspectRatio: 84 / 371, borderRadius: 42 },\n\t\ttall: { width: 371, aspectRatio: 210 / 371, borderRadius: 42 },\n\t\tultra: { width: 630, aspectRatio: 630 / 800, borderRadius: 42 },\n\t\tmassive: { width: 891, height: 1900, aspectRatio: 891 / 891, borderRadius: 42 }\n\t};\n\n\ttype ScreenSize = 'mobile' | 'tablet' | 'desktop';\n\n\tlet {\n\t\tpreset = 'default',\n\t\tclass: className,\n\t\tchildren,\n\t\tid\n\t}: {\n\t\t/** Size preset to control the island dimensions. */\n\t\tpreset?: SizePreset;\n\t\t/** CSS class(es) forwarded to the root element. */\n\t\tclass?: string;\n\t\t/** Content rendered inside the island. */\n\t\tchildren?: Snippet;\n\t\t/** Optional id attribute. */\n\t\tid?: string;\n\t} = $props();\n\n\tlet screenSize: ScreenSize = $state('desktop');\n\n\tonMount(() => {\n\t\tconst handleResize = () => {\n\t\t\tif (window.innerWidth <= 640) {\n\t\t\t\tscreenSize = 'mobile';\n\t\t\t} else if (window.innerWidth <= 1024) {\n\t\t\t\tscreenSize = 'tablet';\n\t\t\t} else {\n\t\t\t\tscreenSize = 'desktop';\n\t\t\t}\n\t\t};\n\n\t\thandleResize();\n\t\twindow.addEventListener('resize', handleResize);\n\t\treturn () => window.removeEventListener('resize', handleResize);\n\t});\n\n\tconst currentPreset = $derived(SIZE_PRESETS[preset]);\n\n\tconst dimensions = $derived.by(() => {\n\t\tconst isMassiveOnMobile = preset === 'massive' && screenSize === 'mobile';\n\t\tconst isUltraOnMobile = preset === 'ultra' && screenSize === 'mobile';\n\n\t\tif (isMassiveOnMobile) {\n\t\t\treturn { width: '350px', height: `${MAX_HEIGHT_MOBILE_MASSIVE}px` };\n\t\t}\n\n\t\tif (isUltraOnMobile) {\n\t\t\treturn { width: '350px', height: `${MAX_HEIGHT_MOBILE_ULTRA}px` };\n\t\t}\n\n\t\tconst width = Math.min(currentPreset.width, MIN_WIDTH);\n\t\tconst height = currentPreset.aspectRatio * width;\n\t\treturn { width: `${width}px`, height: `${height}px` };\n\t});\n</script>\n\n<div\n\t{id}\n\tclass={cn(\n\t\t'mx-auto flex items-center justify-center overflow-hidden border border-black/10 bg-black text-center text-black transition-all duration-300 ease-in-out focus-within:bg-neutral-900 hover:shadow-md dark:border dark:border-white/5 dark:focus-within:bg-black',\n\t\tclassName\n\t)}\n\tstyle=\"width: {dimensions.width}; height: {dimensions.height}; border-radius: {currentPreset.borderRadius}px;\"\n>\n\t{#if children}\n\t\t<div class=\"contents\">\n\t\t\t{@render children()}\n\t\t</div>\n\t{/if}\n</div>\n",
+			"type": "registry:component",
+			"target": "ui/dynamic-island.svelte"
+		},
+		{
+			"content": "import { clsx, type ClassValue } from 'clsx';\nimport { twMerge } from 'tailwind-merge';\n\nexport function cn(...inputs: ClassValue[]) {\n\treturn twMerge(clsx(inputs));\n}\n",
+			"type": "registry:lib",
+			"target": "utils/cn.ts"
+		},
+		{
+			"content": "@keyframes cosmic-spin {\n\tfrom { transform: rotate(0deg); }\n\tto { transform: rotate(360deg); }\n}\n\n@keyframes cosmic-spin-slow {\n\tfrom { transform: rotate(0deg); }\n\tto { transform: rotate(-360deg); }\n}\n\n@keyframes cult-shimmer {\n\t0% { background-position: 0% 50%; }\n\t50% { background-position: 100% 50%; }\n\t100% { background-position: 0% 50%; }\n}\n\n@utility animate-cosmic-spin {\n\tanimation: cosmic-spin 3s linear infinite;\n}\n\n@utility animate-cosmic-spin-slow {\n\tanimation: cosmic-spin-slow 5s linear infinite;\n}\n\n@utility animate-cult-shimmer {\n\tanimation: cult-shimmer 8s ease infinite;\n}\n",
+			"type": "registry:file",
+			"target": "cult-ui-styles.css"
+		}
+	]
+}

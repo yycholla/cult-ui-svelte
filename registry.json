@@ -1,0 +1,393 @@
+{
+	"$schema": "https://shadcn-svelte.com/schema/registry.json",
+	"name": "cult-ui-svelte",
+	"homepage": "https://github.com/yycholla/cult-ui-svelte",
+	"items": [
+		{
+			"name": "cosmic-button",
+			"type": "registry:ui",
+			"title": "Cosmic Button",
+			"description": "A glowing animated button inspired by cult-ui.",
+			"dependencies": [
+				"clsx",
+				"tailwind-merge"
+			],
+			"files": [
+				{
+					"path": "src/lib/components/CosmicButton.svelte",
+					"type": "registry:component",
+					"target": "ui/cosmic-button.svelte"
+				},
+				{
+					"path": "src/lib/utils/cn.ts",
+					"type": "registry:lib",
+					"target": "utils/cn.ts"
+				},
+				{
+					"path": "src/lib/styles.css",
+					"type": "registry:file",
+					"target": "cult-ui-styles.css"
+				}
+			],
+			"docs": "Import the generated cult-ui-styles.css from your app stylesheet (for example: `@import '$lib/components/ui/cult-ui-styles.css';`) if your bundler does not include registry CSS files automatically.",
+			"categories": [
+				"button",
+				"animation"
+			],
+			"meta": {
+				"source": "https://github.com/nolly-studio/cult-ui",
+				"port": "svelte-5"
+			},
+			"registryDependencies": []
+		},
+		{
+			"name": "glow-button",
+			"type": "registry:ui",
+			"title": "Glow Button",
+			"description": "A button with a soft glow treatment.",
+			"dependencies": [
+				"clsx",
+				"tailwind-merge"
+			],
+			"files": [
+				{
+					"path": "src/lib/components/GlowButton.svelte",
+					"type": "registry:component",
+					"target": "ui/glow-button.svelte"
+				},
+				{
+					"path": "src/lib/utils/cn.ts",
+					"type": "registry:lib",
+					"target": "utils/cn.ts"
+				},
+				{
+					"path": "src/lib/styles.css",
+					"type": "registry:file",
+					"target": "cult-ui-styles.css"
+				}
+			],
+			"docs": "Import the generated cult-ui-styles.css from your app stylesheet (for example: `@import '$lib/components/ui/cult-ui-styles.css';`) if your bundler does not include registry CSS files automatically.",
+			"categories": [
+				"button",
+				"animation"
+			],
+			"meta": {
+				"source": "https://github.com/nolly-studio/cult-ui",
+				"port": "svelte-5"
+			},
+			"registryDependencies": []
+		},
+		{
+			"name": "gradient-heading",
+			"type": "registry:ui",
+			"title": "Gradient Heading",
+			"description": "Gradient text heading component with size and weight variants.",
+			"dependencies": [
+				"clsx",
+				"tailwind-merge"
+			],
+			"files": [
+				{
+					"path": "src/lib/components/GradientHeading.svelte",
+					"type": "registry:component",
+					"target": "ui/gradient-heading.svelte"
+				},
+				{
+					"path": "src/lib/utils/cn.ts",
+					"type": "registry:lib",
+					"target": "utils/cn.ts"
+				},
+				{
+					"path": "src/lib/styles.css",
+					"type": "registry:file",
+					"target": "cult-ui-styles.css"
+				}
+			],
+			"docs": "Import the generated cult-ui-styles.css from your app stylesheet (for example: `@import '$lib/components/ui/cult-ui-styles.css';`) if your bundler does not include registry CSS files automatically.",
+			"categories": [
+				"typography"
+			],
+			"meta": {
+				"source": "https://github.com/nolly-studio/cult-ui",
+				"port": "svelte-5"
+			},
+			"registryDependencies": []
+		},
+		{
+			"name": "animated-number",
+			"type": "registry:ui",
+			"title": "Animated Number",
+			"description": "A Svelte motion based animated numeric value.",
+			"dependencies": [
+				"clsx",
+				"tailwind-merge"
+			],
+			"files": [
+				{
+					"path": "src/lib/components/AnimatedNumber.svelte",
+					"type": "registry:component",
+					"target": "ui/animated-number.svelte"
+				},
+				{
+					"path": "src/lib/utils/cn.ts",
+					"type": "registry:lib",
+					"target": "utils/cn.ts"
+				},
+				{
+					"path": "src/lib/styles.css",
+					"type": "registry:file",
+					"target": "cult-ui-styles.css"
+				}
+			],
+			"docs": "Import the generated cult-ui-styles.css from your app stylesheet (for example: `@import '$lib/components/ui/cult-ui-styles.css';`) if your bundler does not include registry CSS files automatically.",
+			"categories": [
+				"animation",
+				"data-display"
+			],
+			"meta": {
+				"source": "https://github.com/nolly-studio/cult-ui",
+				"port": "svelte-5"
+			},
+			"registryDependencies": []
+		},
+		{
+			"name": "minimal-card",
+			"type": "registry:ui",
+			"title": "Minimal Card",
+			"description": "A minimal compound card set with image, title, description, content, and footer parts.",
+			"dependencies": [
+				"clsx",
+				"tailwind-merge"
+			],
+			"files": [
+				{
+					"path": "src/lib/components/MinimalCard.svelte",
+					"type": "registry:component",
+					"target": "ui/minimal-card.svelte"
+				},
+				{
+					"path": "src/lib/components/MinimalCardImage.svelte",
+					"type": "registry:component",
+					"target": "ui/minimal-card-image.svelte"
+				},
+				{
+					"path": "src/lib/components/MinimalCardTitle.svelte",
+					"type": "registry:component",
+					"target": "ui/minimal-card-title.svelte"
+				},
+				{
+					"path": "src/lib/components/MinimalCardDescription.svelte",
+					"type": "registry:component",
+					"target": "ui/minimal-card-description.svelte"
+				},
+				{
+					"path": "src/lib/components/MinimalCardContent.svelte",
+					"type": "registry:component",
+					"target": "ui/minimal-card-content.svelte"
+				},
+				{
+					"path": "src/lib/components/MinimalCardFooter.svelte",
+					"type": "registry:component",
+					"target": "ui/minimal-card-footer.svelte"
+				},
+				{
+					"path": "src/lib/utils/cn.ts",
+					"type": "registry:lib",
+					"target": "utils/cn.ts"
+				},
+				{
+					"path": "src/lib/styles.css",
+					"type": "registry:file",
+					"target": "cult-ui-styles.css"
+				}
+			],
+			"docs": "Import the generated cult-ui-styles.css from your app stylesheet (for example: `@import '$lib/components/ui/cult-ui-styles.css';`) if your bundler does not include registry CSS files automatically.",
+			"categories": [
+				"card"
+			],
+			"meta": {
+				"source": "https://github.com/nolly-studio/cult-ui",
+				"port": "svelte-5"
+			},
+			"registryDependencies": []
+		},
+		{
+			"name": "mock-browser-window",
+			"type": "registry:ui",
+			"title": "Mock Browser Window",
+			"description": "A stylized browser window frame for product demos and screenshots.",
+			"dependencies": [
+				"clsx",
+				"tailwind-merge"
+			],
+			"files": [
+				{
+					"path": "src/lib/components/MockBrowserWindow.svelte",
+					"type": "registry:component",
+					"target": "ui/mock-browser-window.svelte"
+				},
+				{
+					"path": "src/lib/utils/cn.ts",
+					"type": "registry:lib",
+					"target": "utils/cn.ts"
+				},
+				{
+					"path": "src/lib/styles.css",
+					"type": "registry:file",
+					"target": "cult-ui-styles.css"
+				}
+			],
+			"docs": "Import the generated cult-ui-styles.css from your app stylesheet (for example: `@import '$lib/components/ui/cult-ui-styles.css';`) if your bundler does not include registry CSS files automatically.",
+			"categories": [
+				"mockup",
+				"browser"
+			],
+			"meta": {
+				"source": "https://github.com/nolly-studio/cult-ui",
+				"port": "svelte-5"
+			},
+			"registryDependencies": []
+		},
+		{
+			"name": "dither-image",
+			"type": "registry:ui",
+			"title": "Dither Image",
+			"description": "A compound dithered image frame with overlay, reveal, content, and caption parts.",
+			"dependencies": [
+				"clsx",
+				"tailwind-merge"
+			],
+			"files": [
+				{
+					"path": "src/lib/components/DitherImage.svelte",
+					"type": "registry:component",
+					"target": "ui/dither-image.svelte"
+				},
+				{
+					"path": "src/lib/components/DitherImageFrame.svelte",
+					"type": "registry:component",
+					"target": "ui/dither-image-frame.svelte"
+				},
+				{
+					"path": "src/lib/components/DitherImageContent.svelte",
+					"type": "registry:component",
+					"target": "ui/dither-image-content.svelte"
+				},
+				{
+					"path": "src/lib/components/DitherImageCaption.svelte",
+					"type": "registry:component",
+					"target": "ui/dither-image-caption.svelte"
+				},
+				{
+					"path": "src/lib/components/DitherImageReveal.svelte",
+					"type": "registry:component",
+					"target": "ui/dither-image-reveal.svelte"
+				},
+				{
+					"path": "src/lib/components/DitherImageOverlay.svelte",
+					"type": "registry:component",
+					"target": "ui/dither-image-overlay.svelte"
+				},
+				{
+					"path": "src/lib/utils/cn.ts",
+					"type": "registry:lib",
+					"target": "utils/cn.ts"
+				},
+				{
+					"path": "src/lib/styles.css",
+					"type": "registry:file",
+					"target": "cult-ui-styles.css"
+				}
+			],
+			"docs": "Import the generated cult-ui-styles.css from your app stylesheet (for example: `@import '$lib/components/ui/cult-ui-styles.css';`) if your bundler does not include registry CSS files automatically.",
+			"categories": [
+				"image",
+				"effect"
+			],
+			"meta": {
+				"source": "https://github.com/nolly-studio/cult-ui",
+				"port": "svelte-5"
+			},
+			"registryDependencies": []
+		},
+		{
+			"name": "dock",
+			"type": "registry:ui",
+			"title": "Dock",
+			"description": "A macOS-style interactive dock with proximity scaling items.",
+			"dependencies": [
+				"clsx",
+				"tailwind-merge"
+			],
+			"files": [
+				{
+					"path": "src/lib/components/Dock.svelte",
+					"type": "registry:component",
+					"target": "ui/dock.svelte"
+				},
+				{
+					"path": "src/lib/components/DockItem.svelte",
+					"type": "registry:component",
+					"target": "ui/dock-item.svelte"
+				},
+				{
+					"path": "src/lib/utils/cn.ts",
+					"type": "registry:lib",
+					"target": "utils/cn.ts"
+				},
+				{
+					"path": "src/lib/styles.css",
+					"type": "registry:file",
+					"target": "cult-ui-styles.css"
+				}
+			],
+			"docs": "Import the generated cult-ui-styles.css from your app stylesheet (for example: `@import '$lib/components/ui/cult-ui-styles.css';`) if your bundler does not include registry CSS files automatically.",
+			"categories": [
+				"navigation",
+				"animation"
+			],
+			"meta": {
+				"source": "https://github.com/nolly-studio/cult-ui",
+				"port": "svelte-5"
+			},
+			"registryDependencies": []
+		},
+		{
+			"name": "dynamic-island",
+			"type": "registry:ui",
+			"title": "Dynamic Island",
+			"description": "An interactive dynamic-island-style container with size presets.",
+			"dependencies": [
+				"clsx",
+				"tailwind-merge"
+			],
+			"files": [
+				{
+					"path": "src/lib/components/DynamicIsland.svelte",
+					"type": "registry:component",
+					"target": "ui/dynamic-island.svelte"
+				},
+				{
+					"path": "src/lib/utils/cn.ts",
+					"type": "registry:lib",
+					"target": "utils/cn.ts"
+				},
+				{
+					"path": "src/lib/styles.css",
+					"type": "registry:file",
+					"target": "cult-ui-styles.css"
+				}
+			],
+			"docs": "Import the generated cult-ui-styles.css from your app stylesheet (for example: `@import '$lib/components/ui/cult-ui-styles.css';`) if your bundler does not include registry CSS files automatically.",
+			"categories": [
+				"interactive",
+				"animation"
+			],
+			"meta": {
+				"source": "https://github.com/nolly-studio/cult-ui",
+				"port": "svelte-5"
+			},
+			"registryDependencies": []
+		}
+	]
+}

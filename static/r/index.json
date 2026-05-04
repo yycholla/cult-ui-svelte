@@ -1,0 +1,146 @@
+[
+	{
+		"name": "cosmic-button",
+		"title": "Cosmic Button",
+		"type": "registry:ui",
+		"description": "A glowing animated button inspired by cult-ui.",
+		"dependencies": [
+			"clsx",
+			"tailwind-merge"
+		],
+		"registryDependencies": [],
+		"meta": {
+			"source": "https://github.com/nolly-studio/cult-ui",
+			"port": "svelte-5"
+		},
+		"relativeUrl": "cosmic-button.json"
+	},
+	{
+		"name": "glow-button",
+		"title": "Glow Button",
+		"type": "registry:ui",
+		"description": "A button with a soft glow treatment.",
+		"dependencies": [
+			"clsx",
+			"tailwind-merge"
+		],
+		"registryDependencies": [],
+		"meta": {
+			"source": "https://github.com/nolly-studio/cult-ui",
+			"port": "svelte-5"
+		},
+		"relativeUrl": "glow-button.json"
+	},
+	{
+		"name": "gradient-heading",
+		"title": "Gradient Heading",
+		"type": "registry:ui",
+		"description": "Gradient text heading component with size and weight variants.",
+		"dependencies": [
+			"clsx",
+			"tailwind-merge"
+		],
+		"registryDependencies": [],
+		"meta": {
+			"source": "https://github.com/nolly-studio/cult-ui",
+			"port": "svelte-5"
+		},
+		"relativeUrl": "gradient-heading.json"
+	},
+	{
+		"name": "animated-number",
+		"title": "Animated Number",
+		"type": "registry:ui",
+		"description": "A Svelte motion based animated numeric value.",
+		"dependencies": [
+			"clsx",
+			"tailwind-merge"
+		],
+		"registryDependencies": [],
+		"meta": {
+			"source": "https://github.com/nolly-studio/cult-ui",
+			"port": "svelte-5"
+		},
+		"relativeUrl": "animated-number.json"
+	},
+	{
+		"name": "minimal-card",
+		"title": "Minimal Card",
+		"type": "registry:ui",
+		"description": "A minimal compound card set with image, title, description, content, and footer parts.",
+		"dependencies": [
+			"clsx",
+			"tailwind-merge"
+		],
+		"registryDependencies": [],
+		"meta": {
+			"source": "https://github.com/nolly-studio/cult-ui",
+			"port": "svelte-5"
+		},
+		"relativeUrl": "minimal-card.json"
+	},
+	{
+		"name": "mock-browser-window",
+		"title": "Mock Browser Window",
+		"type": "registry:ui",
+		"description": "A stylized browser window frame for product demos and screenshots.",
+		"dependencies": [
+			"clsx",
+			"tailwind-merge"
+		],
+		"registryDependencies": [],
+		"meta": {
+			"source": "https://github.com/nolly-studio/cult-ui",
+			"port": "svelte-5"
+		},
+		"relativeUrl": "mock-browser-window.json"
+	},
+	{
+		"name": "dither-image",
+		"title": "Dither Image",
+		"type": "registry:ui",
+		"description": "A compound dithered image frame with overlay, reveal, content, and caption parts.",
+		"dependencies": [
+			"clsx",
+			"tailwind-merge"
+		],
+		"registryDependencies": [],
+		"meta": {
+			"source": "https://github.com/nolly-studio/cult-ui",
+			"port": "svelte-5"
+		},
+		"relativeUrl": "dither-image.json"
+	},
+	{
+		"name": "dock",
+		"title": "Dock",
+		"type": "registry:ui",
+		"description": "A macOS-style interactive dock with proximity scaling items.",
+		"dependencies": [
+			"clsx",
+			"tailwind-merge"
+		],
+		"registryDependencies": [],
+		"meta": {
+			"source": "https://github.com/nolly-studio/cult-ui",
+			"port": "svelte-5"
+		},
+		"relativeUrl": "dock.json"
+	},
+	{
+		"name": "dynamic-island",
+		"title": "Dynamic Island",
+		"type": "registry:ui",
+		"description": "An interactive dynamic-island-style container with size presets.",
+		"dependencies": [
+			"clsx",
+			"tailwind-merge"
+		],
+		"registryDependencies": [],
+		"meta": {
+			"source": "https://github.com/nolly-studio/cult-ui",
+			"port": "svelte-5"
+		},
+		"relativeUrl": "dynamic-island.json"
+	}
+]

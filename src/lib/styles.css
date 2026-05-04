@@ -1,0 +1,27 @@
+@keyframes cosmic-spin {
+	from { transform: rotate(0deg); }
+	to { transform: rotate(360deg); }
+}
+
+@keyframes cosmic-spin-slow {
+	from { transform: rotate(0deg); }
+	to { transform: rotate(-360deg); }
+}
+
+@keyframes cult-shimmer {
+	0% { background-position: 0% 50%; }
+	50% { background-position: 100% 50%; }
+	100% { background-position: 0% 50%; }
+}
+
+@utility animate-cosmic-spin {
+	animation: cosmic-spin 3s linear infinite;
+}
+
+@utility animate-cosmic-spin-slow {
+	animation: cosmic-spin-slow 5s linear infinite;
+}
+
+@utility animate-cult-shimmer {
+	animation: cult-shimmer 8s ease infinite;
+}

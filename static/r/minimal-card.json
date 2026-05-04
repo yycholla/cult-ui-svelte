@@ -1,0 +1,57 @@
+{
+	"$schema": "https://shadcn-svelte.com/schema/registry-item.json",
+	"name": "minimal-card",
+	"title": "Minimal Card",
+	"type": "registry:ui",
+	"description": "A minimal compound card set with image, title, description, content, and footer parts.",
+	"dependencies": [
+		"clsx",
+		"tailwind-merge"
+	],
+	"meta": {
+		"source": "https://github.com/nolly-studio/cult-ui",
+		"port": "svelte-5"
+	},
+	"files": [
+		{
+			"content": "<script lang=\"ts\">\n\timport { cn } from '$UTILS$/cn';\n\n\tlet {\n\t\tclass: className = '',\n\t\tchildren,\n\t}: {\n\t\tclass?: string;\n\t\tchildren?: import('svelte').Snippet;\n\t} = $props();\n</script>\n\n<div\n\tclass={cn(\n\t\t'rounded-[24px] dark:bg-neutral-800 bg-neutral-50 p-2 no-underline shadow-sm transition-colors hover:bg-neutral-100 dark:hover:bg-neutral-800/80',\n\t\t'shadow-[0px_1px_1px_0px_rgba(0,0,0,0.05),0px_1px_1px_0px_rgba(255,252,240,0.5)_inset,0px_0px_0px_1px_hsla(0,0%,100%,0.1)_inset,0px_0px_1px_0px_rgba(28,27,26,0.5)]',\n\t\t'shadow-[rgba(17,24,28,0.08)_0_0_0_1px,rgba(17,24,28,0.08)_0_1px_2px_-1px,rgba(17,24,28,0.04)_0_2px_4px]',\n\t\t'dark:shadow-[0_1px_0_0_rgba(255,255,255,0.03)_inset,0_0_0_1px_rgba(255,255,255,0.03)_inset,0_0_0_1px_rgba(0,0,0,0.1),0_2px_2px_0_rgba(0,0,0,0.1),0_4px_4px_0_rgba(0,0,0,0.1),0_8px_8px_0_rgba(0,0,0,0.1)]',\n\t\tclassName\n\t)}\n>\n\t{@render children?.()}\n</div>\n",
+			"type": "registry:component",
+			"target": "ui/minimal-card.svelte"
+		},
+		{
+			"content": "<script lang=\"ts\">\n\timport { cn } from '$UTILS$/cn';\n\n\tlet {\n\t\tsrc,\n\t\talt,\n\t\tclass: className = '',\n\t}: {\n\t\tsrc: string;\n\t\talt: string;\n\t\tclass?: string;\n\t} = $props();\n</script>\n\n<div\n\tclass={cn(\n\t\t'relative h-[190px] w-full rounded-[20px] mb-6',\n\t\t'shadow-[0px_1px_1px_0px_rgba(0,0,0,0.05),0px_1px_1px_0px_rgba(255,252,240,0.5)_inset,0px_0px_0px_1px_hsla(0,0%,100%,0.1)_inset,0px_0px_1px_0px_rgba(28,27,26,0.5)]',\n\t\t'dark:shadow-[0_1px_0_0_rgba(255,255,255,0.03)_inset,0_0_0_1px_rgba(255,255,255,0.03)_inset,0_0_0_1px_rgba(0,0,0,0.1),0_2px_2px_0_rgba(0,0,0,0.1),0_4px_4px_0_rgba(0,0,0,0.1),0_8px_8px_0_rgba(0,0,0,0.1)]',\n\t\tclassName\n\t)}\n>\n\t<img\n\t\tsrc={src}\n\t\talt={alt}\n\t\twidth={200}\n\t\theight={200}\n\t\tclass=\"rounded-[16px] object-cover absolute h-full w-full inset-0\"\n\t/>\n\t<div class=\"absolute inset-0 rounded-[16px]\">\n\t\t<div\n\t\t\tclass={cn(\n\t\t\t\t'absolute inset-0 rounded-[16px]',\n\t\t\t\t'shadow-[0px_0px_0px_1px_rgba(0,0,0,.07),0px_0px_0px_3px_#fff,0px_0px_0px_4px_rgba(0,0,0,.08)]',\n\t\t\t\t'dark:shadow-[0px_0px_0px_1px_rgba(0,0,0,.07),0px_0px_0px_3px_rgba(100,100,100,0.3),0px_0px_0px_4px_rgba(0,0,0,.08)]'\n\t\t\t)}\n\t\t></div>\n\t\t<div\n\t\t\tclass={cn(\n\t\t\t\t'absolute inset-0 rounded-[16px]',\n\t\t\t\t'dark:shadow-[0px_1px_1px_0px_rgba(0,0,0,0.15),0px_1px_1px_0px_rgba(0,0,0,0.15)_inset,0px_0px_0px_1px_rgba(0,0,0,0.15)_inset,0px_0px_1px_0px_rgba(0,0,0,0.15)]'\n\t\t\t)}\n\t\t></div>\n\t</div>\n</div>\n",
+			"type": "registry:component",
+			"target": "ui/minimal-card-image.svelte"
+		},
+		{
+			"content": "<script lang=\"ts\">\n\timport { cn } from '$UTILS$/cn';\n\n\tlet {\n\t\tclass: className = '',\n\t\tchildren,\n\t}: {\n\t\tclass?: string;\n\t\tchildren?: import('svelte').Snippet;\n\t} = $props();\n</script>\n\n<h3 class={cn('text-lg mt-2 font-semibold leading-tight px-1', className)}>\n\t{@render children?.()}\n</h3>\n",
+			"type": "registry:component",
+			"target": "ui/minimal-card-title.svelte"
+		},
+		{
+			"content": "<script lang=\"ts\">\n\timport { cn } from '$UTILS$/cn';\n\n\tlet {\n\t\tclass: className = '',\n\t\tchildren,\n\t}: {\n\t\tclass?: string;\n\t\tchildren?: import('svelte').Snippet;\n\t} = $props();\n</script>\n\n<p class={cn('text-sm text-neutral-500 pb-2 px-1', className)}>\n\t{@render children?.()}\n</p>\n",
+			"type": "registry:component",
+			"target": "ui/minimal-card-description.svelte"
+		},
+		{
+			"content": "<script lang=\"ts\">\n\timport { cn } from '$UTILS$/cn';\n\n\tlet {\n\t\tclass: className = '',\n\t\tchildren,\n\t}: {\n\t\tclass?: string;\n\t\tchildren?: import('svelte').Snippet;\n\t} = $props();\n</script>\n\n<div class={cn('p-6 pt-0', className)}>\n\t{@render children?.()}\n</div>\n",
+			"type": "registry:component",
+			"target": "ui/minimal-card-content.svelte"
+		},
+		{
+			"content": "<script lang=\"ts\">\n\timport { cn } from '$UTILS$/cn';\n\n\tlet {\n\t\tclass: className = '',\n\t\tchildren,\n\t}: {\n\t\tclass?: string;\n\t\tchildren?: import('svelte').Snippet;\n\t} = $props();\n</script>\n\n<div class={cn('flex items-center p-6 pt-0', className)}>\n\t{@render children?.()}\n</div>\n",
+			"type": "registry:component",
+			"target": "ui/minimal-card-footer.svelte"
+		},
+		{
+			"content": "import { clsx, type ClassValue } from 'clsx';\nimport { twMerge } from 'tailwind-merge';\n\nexport function cn(...inputs: ClassValue[]) {\n\treturn twMerge(clsx(inputs));\n}\n",
+			"type": "registry:lib",
+			"target": "utils/cn.ts"
+		},
+		{
+			"content": "@keyframes cosmic-spin {\n\tfrom { transform: rotate(0deg); }\n\tto { transform: rotate(360deg); }\n}\n\n@keyframes cosmic-spin-slow {\n\tfrom { transform: rotate(0deg); }\n\tto { transform: rotate(-360deg); }\n}\n\n@keyframes cult-shimmer {\n\t0% { background-position: 0% 50%; }\n\t50% { background-position: 100% 50%; }\n\t100% { background-position: 0% 50%; }\n}\n\n@utility animate-cosmic-spin {\n\tanimation: cosmic-spin 3s linear infinite;\n}\n\n@utility animate-cosmic-spin-slow {\n\tanimation: cosmic-spin-slow 5s linear infinite;\n}\n\n@utility animate-cult-shimmer {\n\tanimation: cult-shimmer 8s ease infinite;\n}\n",
+			"type": "registry:file",
+			"target": "cult-ui-styles.css"
+		}
+	]
+}

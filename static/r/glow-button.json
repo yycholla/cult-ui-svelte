@@ -1,0 +1,32 @@
+{
+	"$schema": "https://shadcn-svelte.com/schema/registry-item.json",
+	"name": "glow-button",
+	"title": "Glow Button",
+	"type": "registry:ui",
+	"description": "A button with a soft glow treatment.",
+	"dependencies": [
+		"clsx",
+		"tailwind-merge"
+	],
+	"meta": {
+		"source": "https://github.com/nolly-studio/cult-ui",
+		"port": "svelte-5"
+	},
+	"files": [
+		{
+			"content": "<script lang=\"ts\">\n\timport { cn } from '$UTILS$/cn';\n\n\tlet {\n\t\thref = '#',\n\t\ttext = 'Button',\n\t\tglowColor = '#FFAA81',\n\t\ttextColor = 'black',\n\t\tbackgroundColor = '#d1d1d1',\n\t\tclass: className,\n\t}: {\n\t\thref?: string;\n\t\ttext?: string;\n\t\tglowColor?: string;\n\t\ttextColor?: string;\n\t\tbackgroundColor?: string;\n\t\tclass?: string;\n\t} = $props();\n\n\tlet isHovering = $state(false);\n\tlet glowPosition = $state(0);\n\tlet buttonEl: HTMLAnchorElement | undefined = $state();\n\n\tfunction handleMouseMove(event: MouseEvent) {\n\t\tif (!buttonEl || !isHovering) return;\n\t\tconst rect = buttonEl.getBoundingClientRect();\n\t\tconst x = event.clientX - rect.left;\n\t\tconst buttonWidth = rect.width;\n\t\tconst percentage = (x / buttonWidth) * 100;\n\t\tglowPosition = percentage;\n\t}\n\n\t$effect(() => {\n\t\tif (isHovering) {\n\t\t\twindow.addEventListener('mousemove', handleMouseMove);\n\t\t}\n\t\treturn () => {\n\t\t\twindow.removeEventListener('mousemove', handleMouseMove);\n\t\t};\n\t});\n</script>\n\n<div class={cn('relative inline-flex items-center z-10', className)}>\n\t<div\n\t\tclass=\"border-button-light-blur absolute left-1/2 top-1/2 h-[calc(100%+9px)] w-[calc(100%+9px)] -translate-x-1/2 -translate-y-1/2 rounded-full will-change-transform\"\n\t\tstyle=\"opacity: 1\"\n\t>\n\t\t<div class=\"border-button-light relative h-full w-full rounded-full\"></div>\n\t</div>\n\t<div\n\t\tclass=\"border-button-light-blur absolute left-1/2 top-1/2 h-[calc(100%+9px)] w-[calc(100%+9px)] -translate-x-1/2 -translate-y-1/2 scale-x-[-1] transform rounded-full will-change-transform\"\n\t\tstyle=\"opacity: 0\"\n\t>\n\t\t<div class=\"border-button-light relative h-full w-full rounded-full\"></div>\n\t</div>\n\t<!-- svelte-ignore a11y_missing_attribute -->\n\t<a\n\t\tbind:this={buttonEl}\n\t\t{href}\n\t\tclass=\"transition-all duration-200 uppercase font-bold flex items-center justify-center h-10 text-12 -tracking-[0.015em] relative z-10 overflow-hidden rounded-full border border-primary/20 space-x-1 px-16 sm:pl-[59px] sm:pr-[52px] bg-gradient-to-br from-background to-muted/50\"\n\t\tstyle=\"background-color: {backgroundColor}\"\n\t\tonmouseenter={() => (isHovering = true)}\n\t\tonmouseleave={() => (isHovering = false)}\n\t>\n\t\t<div\n\t\t\tclass=\"absolute -z-10 flex w-[204px] items-center justify-center pointer-events-none\"\n\t\t\tstyle=\"transform: translateX(calc({glowPosition}% - 102px)) translateZ(0px); opacity: {isHovering ? 1 : 0}; transition: opacity 0.2s ease-in-out, transform 0.1s ease-out;\"\n\t\t>\n\t\t\t<div\n\t\t\t\tclass=\"absolute top-1/2 h-[121px] w-[121px] -translate-y-1/2\"\n\t\t\t\tstyle=\"background: radial-gradient(50% 50% at 50% 50%, #FFFFF5 3.5%, {glowColor} 26.5%, #FFDA9F 37.5%, rgba(255,170,129,0.50) 49%, rgba(210,106,58,0.00) 92.5%);\"\n\t\t\t></div>\n\t\t\t<div\n\t\t\t\tclass=\"absolute top-1/2 h-[103px] w-[204px] -translate-y-1/2 blur-[5px]\"\n\t\t\t\tstyle=\"background: radial-gradient(43.3% 44.23% at 50% 49.51%, #FFFFF7 29%, #FFFACD 48.5%, #F4D2BF 60.71%, rgba(214,211,210,0.00) 100%);\"\n\t\t\t></div>\n\t\t</div>\n\t\t<span style=\"color: {textColor}\">{text}</span>\n\t\t<svg\n\t\t\txmlns=\"http://www.w3.org/2000/svg\"\n\t\t\tfill=\"none\"\n\t\t\tviewBox=\"0 0 17 9\"\n\t\t\tclass=\"h-[9px] w-[17px]\"\n\t\t\tstyle=\"color: {textColor}\"\n\t\t>\n\t\t\t<path\n\t\t\t\tfill=\"currentColor\"\n\t\t\t\tfill-rule=\"evenodd\"\n\t\t\t\td=\"m12.495 0 4.495 4.495-4.495 4.495-.99-.99 2.805-2.805H0v-1.4h14.31L11.505.99z\"\n\t\t\t\tclip-rule=\"evenodd\"\n\t\t\t/>\n\t\t</svg>\n\t</a>\n</div>\n",
+			"type": "registry:component",
+			"target": "ui/glow-button.svelte"
+		},
+		{
+			"content": "import { clsx, type ClassValue } from 'clsx';\nimport { twMerge } from 'tailwind-merge';\n\nexport function cn(...inputs: ClassValue[]) {\n\treturn twMerge(clsx(inputs));\n}\n",
+			"type": "registry:lib",
+			"target": "utils/cn.ts"
+		},
+		{
+			"content": "@keyframes cosmic-spin {\n\tfrom { transform: rotate(0deg); }\n\tto { transform: rotate(360deg); }\n}\n\n@keyframes cosmic-spin-slow {\n\tfrom { transform: rotate(0deg); }\n\tto { transform: rotate(-360deg); }\n}\n\n@keyframes cult-shimmer {\n\t0% { background-position: 0% 50%; }\n\t50% { background-position: 100% 50%; }\n\t100% { background-position: 0% 50%; }\n}\n\n@utility animate-cosmic-spin {\n\tanimation: cosmic-spin 3s linear infinite;\n}\n\n@utility animate-cosmic-spin-slow {\n\tanimation: cosmic-spin-slow 5s linear infinite;\n}\n\n@utility animate-cult-shimmer {\n\tanimation: cult-shimmer 8s ease infinite;\n}\n",
+			"type": "registry:file",
+			"target": "cult-ui-styles.css"
+		}
+	]
+}

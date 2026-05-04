@@ -1,0 +1,32 @@
+{
+	"$schema": "https://shadcn-svelte.com/schema/registry-item.json",
+	"name": "gradient-heading",
+	"title": "Gradient Heading",
+	"type": "registry:ui",
+	"description": "Gradient text heading component with size and weight variants.",
+	"dependencies": [
+		"clsx",
+		"tailwind-merge"
+	],
+	"meta": {
+		"source": "https://github.com/nolly-studio/cult-ui",
+		"port": "svelte-5"
+	},
+	"files": [
+		{
+			"content": "<script lang=\"ts\">\n\timport type { Snippet } from 'svelte';\n\timport { cn } from '$UTILS$/cn';\n\n\ttype Variant = 'default' | 'pink' | 'light' | 'secondary';\n\ttype Size = 'default' | 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xll' | 'xxl' | 'xxxl';\n\ttype Weight = 'default' | 'thin' | 'base' | 'semi' | 'bold' | 'black';\n\n\tlet {\n\t\tas: headingTag = 'h3',\n\t\tvariant = 'default',\n\t\tsize = 'default',\n\t\tweight = 'default',\n\t\tclass: className,\n\t\tchildren,\n\t}: {\n\t\t/** The HTML heading element to render. @default \"h3\" */\n\t\tas?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';\n\t\tvariant?: Variant;\n\t\tsize?: Size;\n\t\tweight?: Weight;\n\t\tclass?: string;\n\t\tchildren?: Snippet;\n\t} = $props();\n\n\tconst variantClasses: Record<Variant, string> = {\n\t\tdefault:\n\t\t\t'bg-gradient-to-t from-neutral-700 to-neutral-800 dark:from-stone-200 dark:to-neutral-200',\n\t\tpink: 'bg-gradient-to-t from-accent to-accent/90 dark:from-stone-200 dark:to-neutral-200',\n\t\tlight: 'bg-gradient-to-t from-neutral-200 to-neutral-300',\n\t\tsecondary:\n\t\t\t'bg-gradient-to-t from-neutral-500 to-neutral-600 dark:from-stone-200 dark:to-neutral-200',\n\t};\n\n\tconst sizeClasses: Record<Size, string> = {\n\t\tdefault: 'text-2xl sm:text-3xl lg:text-4xl',\n\t\txxs: 'text-base sm:text-lg lg:text-lg',\n\t\txs: 'text-lg sm:text-xl lg:text-2xl',\n\t\tsm: 'text-xl sm:text-2xl lg:text-3xl',\n\t\tmd: 'text-2xl sm:text-3xl lg:text-4xl',\n\t\tlg: 'text-3xl sm:text-4xl lg:text-5xl',\n\t\txl: 'text-4xl sm:text-5xl lg:text-6xl',\n\t\txll: 'text-4xl sm:text-6xl lg:text-[5.4rem] lg:leading-[0.5rem]',\n\t\txxl: 'text-5xl sm:text-6xl lg:text-[6rem]',\n\t\txxxl: 'text-5xl sm:text-6xl lg:text-[8rem]',\n\t};\n\n\tconst weightClasses: Record<Weight, string> = {\n\t\tdefault: 'font-bold',\n\t\tthin: 'font-thin',\n\t\tbase: 'font-base',\n\t\tsemi: 'font-semibold',\n\t\tbold: 'font-bold',\n\t\tblack: 'font-black',\n\t};\n</script>\n\n<svelte:element this={headingTag} class={className}>\n\t<span\n\t\tclass={cn(\n\t\t\t'tracking-tight pb-3 bg-clip-text text-transparent',\n\t\t\tvariantClasses[variant],\n\t\t\tsizeClasses[size],\n\t\t\tweightClasses[weight]\n\t\t)}\n\t>\n\t\t{@render children?.()}\n\t</span>\n</svelte:element>\n",
+			"type": "registry:component",
+			"target": "ui/gradient-heading.svelte"
+		},
+		{
+			"content": "import { clsx, type ClassValue } from 'clsx';\nimport { twMerge } from 'tailwind-merge';\n\nexport function cn(...inputs: ClassValue[]) {\n\treturn twMerge(clsx(inputs));\n}\n",
+			"type": "registry:lib",
+			"target": "utils/cn.ts"
+		},
+		{
+			"content": "@keyframes cosmic-spin {\n\tfrom { transform: rotate(0deg); }\n\tto { transform: rotate(360deg); }\n}\n\n@keyframes cosmic-spin-slow {\n\tfrom { transform: rotate(0deg); }\n\tto { transform: rotate(-360deg); }\n}\n\n@keyframes cult-shimmer {\n\t0% { background-position: 0% 50%; }\n\t50% { background-position: 100% 50%; }\n\t100% { background-position: 0% 50%; }\n}\n\n@utility animate-cosmic-spin {\n\tanimation: cosmic-spin 3s linear infinite;\n}\n\n@utility animate-cosmic-spin-slow {\n\tanimation: cosmic-spin-slow 5s linear infinite;\n}\n\n@utility animate-cult-shimmer {\n\tanimation: cult-shimmer 8s ease infinite;\n}\n",
+			"type": "registry:file",
+			"target": "cult-ui-styles.css"
+		}
+	]
+}

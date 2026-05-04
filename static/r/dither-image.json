@@ -1,0 +1,57 @@
+{
+	"$schema": "https://shadcn-svelte.com/schema/registry-item.json",
+	"name": "dither-image",
+	"title": "Dither Image",
+	"type": "registry:ui",
+	"description": "A compound dithered image frame with overlay, reveal, content, and caption parts.",
+	"dependencies": [
+		"clsx",
+		"tailwind-merge"
+	],
+	"meta": {
+		"source": "https://github.com/nolly-studio/cult-ui",
+		"port": "svelte-5"
+	},
+	"files": [
+		{
+			"content": "<script lang=\"ts\">\n\timport { cn } from '$UTILS$/cn';\n\timport type { Snippet } from 'svelte';\n\n\tlet {\n\t\tclass: className = '',\n\t\tchildren,\n\t}: {\n\t\tclass?: string;\n\t\tchildren?: Snippet;\n\t} = $props();\n</script>\n\n<figure\n\tclass={cn('inline-flex flex-col gap-3', className)}\n\tdata-slot=\"dither-image\"\n>\n\t{@render children?.()}\n</figure>\n",
+			"type": "registry:component",
+			"target": "ui/dither-image.svelte"
+		},
+		{
+			"content": "<script lang=\"ts\">\n\timport { cn } from '$UTILS$/cn';\n\timport { setContext } from 'svelte';\n\timport type { Snippet } from 'svelte';\n\n\ttype DitherSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';\n\ttype DitherAspectRatio =\n\t\t| 'square'\n\t\t| 'video'\n\t\t| 'portrait'\n\t\t| 'wide'\n\t\t| (string & {})\n\t\t| number;\n\n\tconst DITHER_SIZE_CLASS: Record<DitherSize, string> = {\n\t\txs: 'dither-xs',\n\t\tsm: 'dither-sm',\n\t\tmd: 'dither-md',\n\t\tlg: 'dither-lg',\n\t\txl: 'dither-xl',\n\t\t'2xl': 'dither-2xl',\n\t};\n\n\tfunction resolveAspectRatio(ratio: DitherAspectRatio): string {\n\t\tif (typeof ratio === 'number') return String(ratio);\n\t\tif (ratio === 'square') return '1 / 1';\n\t\tif (ratio === 'video') return '16 / 9';\n\t\tif (ratio === 'portrait') return '3 / 4';\n\t\tif (ratio === 'wide') return '21 / 9';\n\t\treturn ratio;\n\t}\n\n\tlet {\n\t\tclass: className = '',\n\t\tchildren,\n\t\tsize = 'lg',\n\t\taspectRatio,\n\t\tgrayscale,\n\t\tcontrast,\n\t\tbrightness,\n\t\tblur,\n\t\topacity,\n\t\trounded = true,\n\t\tinvertOnDark = false,\n\t\tstyle = '',\n\t}: {\n\t\tclass?: string;\n\t\tchildren?: Snippet;\n\t\tsize?: DitherSize;\n\t\taspectRatio?: DitherAspectRatio;\n\t\tgrayscale?: number;\n\t\tcontrast?: number;\n\t\tbrightness?: number;\n\t\tblur?: number | string;\n\t\topacity?: number;\n\t\trounded?: boolean | string;\n\t\tinvertOnDark?: boolean;\n\t\tstyle?: string;\n\t} = $props();\n\n\tconst cssVars = $derived.by((): string => {\n\t\tconst parts: string[] = [];\n\t\tif (grayscale !== undefined) parts.push(`--dither-gray:${grayscale}`);\n\t\tif (contrast !== undefined) parts.push(`--dither-contrast:${contrast}`);\n\t\tif (brightness !== undefined) parts.push(`--dither-bright:${brightness}`);\n\t\tif (blur !== undefined) {\n\t\t\tparts.push(\n\t\t\t\t`--dither-blur:${typeof blur === 'number' ? `${blur}px` : blur}`\n\t\t\t);\n\t\t}\n\t\tif (opacity !== undefined) parts.push(`--dither-opacity:${opacity}`);\n\t\tif (aspectRatio !== undefined) {\n\t\t\tparts.push(`aspect-ratio:${resolveAspectRatio(aspectRatio)}`);\n\t\t}\n\t\treturn parts.join(';') + (style ? `;${style}` : '');\n\t});\n\n\tconst roundedClass = $derived.by((): string | undefined => {\n\t\tif (rounded === true) return 'rounded-xl';\n\t\tif (typeof rounded === 'string') return rounded;\n\t\treturn undefined;\n\t});\n\n\tsetContext('dither-image-frame', {\n\t\tget invertOnDark() {\n\t\t\treturn invertOnDark;\n\t\t}\n\t});\n</script>\n\n{#if invertOnDark}\n\t<div class=\"dark:invert\">\n\t\t<div\n\t\t\tclass={cn(\n\t\t\t\tDITHER_SIZE_CLASS[size],\n\t\t\t\t'relative block w-full',\n\t\t\t\troundedClass,\n\t\t\t\tclassName\n\t\t\t)}\n\t\t\tdata-size={size}\n\t\t\tdata-slot=\"dither-image-frame\"\n\t\t\tstyle={cssVars}\n\t\t>\n\t\t\t{@render children?.()}\n\t\t</div>\n\t</div>\n{:else}\n\t<div\n\t\tclass={cn(\n\t\t\tDITHER_SIZE_CLASS[size],\n\t\t\t'relative block w-full',\n\t\t\troundedClass,\n\t\t\tclassName\n\t\t)}\n\t\tdata-size={size}\n\t\tdata-slot=\"dither-image-frame\"\n\t\tstyle={cssVars}\n\t>\n\t\t{@render children?.()}\n\t</div>\n{/if}\n",
+			"type": "registry:component",
+			"target": "ui/dither-image-frame.svelte"
+		},
+		{
+			"content": "<script lang=\"ts\">\n\timport { cn } from '$UTILS$/cn';\n\timport { getContext } from 'svelte';\n\n\tconst ctx = getContext<{ invertOnDark: boolean } | null>(\n\t\t'dither-image-frame'\n\t);\n\n\tlet {\n\t\tclass: className = '',\n\t\tsrc,\n\t\talt,\n\t\t...imgProps\n\t}: {\n\t\tclass?: string;\n\t\tsrc: string;\n\t\talt: string;\n\t\t[key: string]: unknown;\n\t} = $props();\n\n\tconst counterInvert = $derived(ctx?.invertOnDark ? 'dark:invert' : undefined);\n</script>\n\n<img\n\t{src}\n\t{alt}\n\tclass={cn(\n\t\t'block h-full w-full object-cover',\n\t\tcounterInvert,\n\t\tclassName\n\t)}\n\tdata-slot=\"dither-image-content\"\n\t{...imgProps}\n/>\n",
+			"type": "registry:component",
+			"target": "ui/dither-image-content.svelte"
+		},
+		{
+			"content": "<script lang=\"ts\">\n\timport { cn } from '$UTILS$/cn';\n\timport type { Snippet } from 'svelte';\n\n\tlet {\n\t\tclass: className = '',\n\t\tchildren,\n\t}: {\n\t\tclass?: string;\n\t\tchildren?: Snippet;\n\t} = $props();\n</script>\n\n<!-- svelte-ignore a11y_figcaption_parent -->\n<figcaption\n\tclass={cn(\n\t\t'text-pretty text-muted-foreground text-sm leading-relaxed',\n\t\tclassName\n\t)}\n\tdata-slot=\"dither-image-caption\"\n>\n\t{@render children?.()}\n</figcaption>\n",
+			"type": "registry:component",
+			"target": "ui/dither-image-caption.svelte"
+		},
+		{
+			"content": "<script lang=\"ts\">\n\timport { cn } from '$UTILS$/cn';\n\timport type { Snippet } from 'svelte';\n\n\tconst NUMERIC_SIZE_RE = /^\\d+$/;\n\n\tlet {\n\t\tclass: className = '',\n\t\tchildren,\n\t\tsize,\n\t}: {\n\t\tclass?: string;\n\t\tchildren?: Snippet;\n\t\tsize?: number | string;\n\t} = $props();\n\n\tconst sizeClass = $derived.by((): string | undefined => {\n\t\tif (size === undefined) return undefined;\n\t\tif (typeof size === 'number') return `size-${size}`;\n\t\tif (NUMERIC_SIZE_RE.test(size)) return `size-${size}`;\n\t\treturn size;\n\t});\n</script>\n\n<div\n\tclass={cn('relative overflow-hidden', sizeClass, className)}\n\tdata-slot=\"dither-image-reveal\"\n>\n\t{@render children?.()}\n</div>\n",
+			"type": "registry:component",
+			"target": "ui/dither-image-reveal.svelte"
+		},
+		{
+			"content": "<script lang=\"ts\">\n\timport { cn } from '$UTILS$/cn';\n\n\ttype DitherRevealDirection =\n\t\t| 'l'\n\t\t| 'r'\n\t\t| 't'\n\t\t| 'b'\n\t\t| 'tl-br'\n\t\t| 'tr-bl'\n\t\t| 'bl-tr'\n\t\t| 'br-tl'\n\t\t| 'radial';\n\n\tfunction revealMaskImage(\n\t\tdirection: DitherRevealDirection,\n\t\tfrom: number,\n\t\tto: number\n\t): string {\n\t\tconst a = Math.min(from, to);\n\t\tconst b = Math.max(from, to);\n\t\tswitch (direction) {\n\t\t\tcase 'r':\n\t\t\t\treturn `linear-gradient(to right, black ${a}%, transparent ${b}%)`;\n\t\t\tcase 'l':\n\t\t\t\treturn `linear-gradient(to left, black ${a}%, transparent ${b}%)`;\n\t\t\tcase 't':\n\t\t\t\treturn `linear-gradient(to bottom, black ${a}%, transparent ${b}%)`;\n\t\t\tcase 'b':\n\t\t\t\treturn `linear-gradient(to top, black ${a}%, transparent ${b}%)`;\n\t\t\tcase 'tl-br':\n\t\t\t\treturn `linear-gradient(to bottom right, black ${a}%, transparent ${b}%)`;\n\t\t\tcase 'tr-bl':\n\t\t\t\treturn `linear-gradient(to bottom left, black ${a}%, transparent ${b}%)`;\n\t\t\tcase 'bl-tr':\n\t\t\t\treturn `linear-gradient(to top right, black ${a}%, transparent ${b}%)`;\n\t\t\tcase 'br-tl':\n\t\t\t\treturn `linear-gradient(to top left, black ${a}%, transparent ${b}%)`;\n\t\t\tcase 'radial':\n\t\t\t\treturn `radial-gradient(circle at center, black ${a}%, transparent ${b}%)`;\n\t\t}\n\t}\n\n\tfunction revealMaskStyle(\n\t\tdirection: DitherRevealDirection,\n\t\tfrom: number,\n\t\tto: number\n\t): string {\n\t\tconst img = revealMaskImage(direction, from, to);\n\t\treturn [\n\t\t\t`-webkit-mask-image:${img}`,\n\t\t\t`mask-image:${img}`,\n\t\t\t'-webkit-mask-size:100% 100%',\n\t\t\t'mask-size:100% 100%',\n\t\t\t'-webkit-mask-repeat:no-repeat',\n\t\t\t'mask-repeat:no-repeat',\n\t\t].join(';');\n\t}\n\n\tlet {\n\t\tclass: className = '',\n\t\tsrc,\n\t\talt,\n\t\tdirection = 'r',\n\t\tfrom = 0,\n\t\tto = 65,\n\t\tmaskClassName,\n\t\tstyle = '',\n\t\t...rest\n\t}: {\n\t\tclass?: string;\n\t\tsrc: string;\n\t\talt: string;\n\t\tdirection?: DitherRevealDirection;\n\t\tfrom?: number;\n\t\tto?: number;\n\t\tmaskClassName?: string;\n\t\tstyle?: string;\n\t\t[key: string]: unknown;\n\t} = $props();\n\n\tconst typedMaskStyle = $derived(\n\t\tmaskClassName === undefined ? revealMaskStyle(direction, from, to) : ''\n\t);\n</script>\n\n<img\n\t{src}\n\t{alt}\n\tclass={cn(\n\t\t'pointer-events-none absolute inset-0 h-full w-full object-cover',\n\t\tmaskClassName === undefined && 'mask',\n\t\tmaskClassName,\n\t\tclassName\n\t)}\n\tdata-slot=\"dither-image-overlay\"\n\tstyle={typedMaskStyle ? `${typedMaskStyle};${style}` : style}\n\t{...rest}\n/>\n",
+			"type": "registry:component",
+			"target": "ui/dither-image-overlay.svelte"
+		},
+		{
+			"content": "import { clsx, type ClassValue } from 'clsx';\nimport { twMerge } from 'tailwind-merge';\n\nexport function cn(...inputs: ClassValue[]) {\n\treturn twMerge(clsx(inputs));\n}\n",
+			"type": "registry:lib",
+			"target": "utils/cn.ts"
+		},
+		{
+			"content": "@keyframes cosmic-spin {\n\tfrom { transform: rotate(0deg); }\n\tto { transform: rotate(360deg); }\n}\n\n@keyframes cosmic-spin-slow {\n\tfrom { transform: rotate(0deg); }\n\tto { transform: rotate(-360deg); }\n}\n\n@keyframes cult-shimmer {\n\t0% { background-position: 0% 50%; }\n\t50% { background-position: 100% 50%; }\n\t100% { background-position: 0% 50%; }\n}\n\n@utility animate-cosmic-spin {\n\tanimation: cosmic-spin 3s linear infinite;\n}\n\n@utility animate-cosmic-spin-slow {\n\tanimation: cosmic-spin-slow 5s linear infinite;\n}\n\n@utility animate-cult-shimmer {\n\tanimation: cult-shimmer 8s ease infinite;\n}\n",
+			"type": "registry:file",
+			"target": "cult-ui-styles.css"
+		}
+	]
+}

@@ -1,0 +1,32 @@
+{
+	"$schema": "https://shadcn-svelte.com/schema/registry-item.json",
+	"name": "animated-number",
+	"title": "Animated Number",
+	"type": "registry:ui",
+	"description": "A Svelte motion based animated numeric value.",
+	"dependencies": [
+		"clsx",
+		"tailwind-merge"
+	],
+	"meta": {
+		"source": "https://github.com/nolly-studio/cult-ui",
+		"port": "svelte-5"
+	},
+	"files": [
+		{
+			"content": "<script lang=\"ts\">\n\timport { Spring } from 'svelte/motion';\n\n\tinterface AnimatedNumberProps {\n\t\t/** Target numeric value to animate toward */\n\t\tvalue: number;\n\t\t/** Spring stiffness. Higher = snappier. Default 75 */\n\t\tstiffness?: number;\n\t\t/** Spring damping. Higher = less bounce. Default 15 */\n\t\tdamping?: number;\n\t\t/** Decimal precision for the displayed value. Default 0 */\n\t\tprecision?: number;\n\t\t/** Format function receives the animated number and returns a display string. Defaults to `toLocaleString()` */\n\t\tformat?: (value: number) => string;\n\t\t/** CSS class(es) forwarded to the root span */\n\t\tclass?: string;\n\t}\n\n\tlet {\n\t\tvalue,\n\t\tstiffness = 75,\n\t\tdamping = 15,\n\t\tprecision = 0,\n\t\tformat = (num: number) => num.toLocaleString(),\n\t\tclass: className = ''\n\t}: AnimatedNumberProps = $props();\n\n\t// Svelte's Spring does not expose a `mass` parameter like framer-motion.\n\t// It supports stiffness/damping/precision, which cover the common cult-ui use case.\n\tconst animatedValue = new Spring(0, { precision: 0.001 });\n\n\t$effect(() => {\n\t\tanimatedValue.stiffness = stiffness;\n\t\tanimatedValue.damping = damping;\n\t\tanimatedValue.set(value);\n\t});\n\n\tlet displayValue = $derived(format(parseFloat(animatedValue.current.toFixed(precision))));\n</script>\n\n<span class={className}>{displayValue}</span>\n",
+			"type": "registry:component",
+			"target": "ui/animated-number.svelte"
+		},
+		{
+			"content": "import { clsx, type ClassValue } from 'clsx';\nimport { twMerge } from 'tailwind-merge';\n\nexport function cn(...inputs: ClassValue[]) {\n\treturn twMerge(clsx(inputs));\n}\n",
+			"type": "registry:lib",
+			"target": "utils/cn.ts"
+		},
+		{
+			"content": "@keyframes cosmic-spin {\n\tfrom { transform: rotate(0deg); }\n\tto { transform: rotate(360deg); }\n}\n\n@keyframes cosmic-spin-slow {\n\tfrom { transform: rotate(0deg); }\n\tto { transform: rotate(-360deg); }\n}\n\n@keyframes cult-shimmer {\n\t0% { background-position: 0% 50%; }\n\t50% { background-position: 100% 50%; }\n\t100% { background-position: 0% 50%; }\n}\n\n@utility animate-cosmic-spin {\n\tanimation: cosmic-spin 3s linear infinite;\n}\n\n@utility animate-cosmic-spin-slow {\n\tanimation: cosmic-spin-slow 5s linear infinite;\n}\n\n@utility animate-cult-shimmer {\n\tanimation: cult-shimmer 8s ease infinite;\n}\n",
+			"type": "registry:file",
+			"target": "cult-ui-styles.css"
+		}
+	]
+}
