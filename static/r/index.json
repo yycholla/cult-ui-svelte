@@ -142,5 +142,165 @@
 			"port": "svelte-5"
 		},
 		"relativeUrl": "dynamic-island.json"
+	},
+	{
+		"name": "bg-animate-button",
+		"title": "BG Animate Button",
+		"type": "registry:ui",
+		"description": "A button with an animated conic-gradient background shell.",
+		"dependencies": [
+			"clsx",
+			"tailwind-merge"
+		],
+		"registryDependencies": [],
+		"meta": {
+			"source": "https://github.com/nolly-studio/cult-ui",
+			"port": "svelte-5"
+		},
+		"relativeUrl": "bg-animate-button.json"
+	},
+	{
+		"name": "border-beam-button",
+		"title": "Border Beam Button",
+		"type": "registry:ui",
+		"description": "A button with a rotating border beam, implemented without external border-beam dependencies.",
+		"dependencies": [
+			"clsx",
+			"tailwind-merge"
+		],
+		"registryDependencies": [],
+		"meta": {
+			"source": "https://github.com/nolly-studio/cult-ui",
+			"port": "svelte-5"
+		},
+		"relativeUrl": "border-beam-button.json"
+	},
+	{
+		"name": "texture-button",
+		"title": "Texture Button",
+		"type": "registry:ui",
+		"description": "A layered textured button with multiple visual variants.",
+		"dependencies": [
+			"clsx",
+			"tailwind-merge"
+		],
+		"registryDependencies": [],
+		"meta": {
+			"source": "https://github.com/nolly-studio/cult-ui",
+			"port": "svelte-5"
+		},
+		"relativeUrl": "texture-button.json"
+	},
+	{
+		"name": "neumorph-button",
+		"title": "Neumorph Button",
+		"type": "registry:ui",
+		"description": "A tactile neumorphic button with loading state and intent variants.",
+		"dependencies": [
+			"clsx",
+			"tailwind-merge"
+		],
+		"registryDependencies": [],
+		"meta": {
+			"source": "https://github.com/nolly-studio/cult-ui",
+			"port": "svelte-5"
+		},
+		"relativeUrl": "neumorph-button.json"
+	},
+	{
+		"name": "gradient-button-group",
+		"title": "Gradient Button Group",
+		"type": "registry:ui",
+		"description": "A Svelte-native segmented nav control inspired by cult-ui gradient-button-group.",
+		"dependencies": [
+			"clsx",
+			"tailwind-merge"
+		],
+		"registryDependencies": [],
+		"meta": {
+			"source": "https://github.com/nolly-studio/cult-ui",
+			"port": "svelte-5"
+		},
+		"relativeUrl": "gradient-button-group.json"
+	},
+	{
+		"name": "cutout-card",
+		"title": "Cutout Card",
+		"type": "registry:ui",
+		"description": "A layered paper-cut card treatment with clipped-corner visual depth.",
+		"dependencies": [
+			"clsx",
+			"tailwind-merge"
+		],
+		"registryDependencies": [],
+		"meta": {
+			"source": "https://github.com/nolly-studio/cult-ui",
+			"port": "svelte-5"
+		},
+		"relativeUrl": "cutout-card.json"
+	},
+	{
+		"name": "texture-card",
+		"title": "Texture Card",
+		"type": "registry:ui",
+		"description": "A subtle grain, border, and gradient card surface.",
+		"dependencies": [
+			"clsx",
+			"tailwind-merge"
+		],
+		"registryDependencies": [],
+		"meta": {
+			"source": "https://github.com/nolly-studio/cult-ui",
+			"port": "svelte-5"
+		},
+		"relativeUrl": "texture-card.json"
+	},
+	{
+		"name": "neumorph-eyebrow",
+		"title": "Neumorph Eyebrow",
+		"type": "registry:ui",
+		"description": "A small tactile pill label for headings and callouts.",
+		"dependencies": [
+			"clsx",
+			"tailwind-merge"
+		],
+		"registryDependencies": [],
+		"meta": {
+			"source": "https://github.com/nolly-studio/cult-ui",
+			"port": "svelte-5"
+		},
+		"relativeUrl": "neumorph-eyebrow.json"
+	},
+	{
+		"name": "edge-blur",
+		"title": "Edge Blur",
+		"type": "registry:ui",
+		"description": "A utility gradient/blur overlay for fading card or viewport edges.",
+		"dependencies": [
+			"clsx",
+			"tailwind-merge"
+		],
+		"registryDependencies": [],
+		"meta": {
+			"source": "https://github.com/nolly-studio/cult-ui",
+			"port": "svelte-5"
+		},
+		"relativeUrl": "edge-blur.json"
+	},
+	{
+		"name": "squiggle-arrow",
+		"title": "Squiggle Arrow",
+		"type": "registry:ui",
+		"description": "A hand-drawn SVG squiggle arrow with direction variants.",
+		"dependencies": [
+			"clsx",
+			"tailwind-merge"
+		],
+		"registryDependencies": [],
+		"meta": {
+			"source": "https://github.com/nolly-studio/cult-ui",
+			"port": "svelte-5"
+		},
+		"relativeUrl": "squiggle-arrow.json"
 	}
 ]

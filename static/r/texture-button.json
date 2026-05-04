@@ -1,0 +1,32 @@
+{
+	"$schema": "https://shadcn-svelte.com/schema/registry-item.json",
+	"name": "texture-button",
+	"title": "Texture Button",
+	"type": "registry:ui",
+	"description": "A layered textured button with multiple visual variants.",
+	"dependencies": [
+		"clsx",
+		"tailwind-merge"
+	],
+	"meta": {
+		"source": "https://github.com/nolly-studio/cult-ui",
+		"port": "svelte-5"
+	},
+	"files": [
+		{
+			"content": "<script lang=\"ts\">\n\timport type { Snippet } from 'svelte';\n\timport type { HTMLButtonAttributes } from 'svelte/elements';\n\timport { cn } from '$UTILS$/cn';\n\n\ttype Variant = 'primary' | 'secondary' | 'accent' | 'destructive' | 'minimal' | 'icon';\n\ttype Size = 'sm' | 'default' | 'lg' | 'icon';\n\n\tlet {\n\t\tclass: className = '',\n\t\tchildren,\n\t\tvariant = 'primary',\n\t\tsize = 'default',\n\t\t...rest\n\t}: {\n\t\tclass?: string;\n\t\tchildren?: Snippet;\n\t\tvariant?: Variant;\n\t\tsize?: Size;\n\t} & HTMLButtonAttributes = $props();\n\n\tconst outer: Record<Variant, string> = {\n\t\tprimary: 'w-full border border-black/10 dark:border-2 dark:border-black bg-gradient-to-b from-black/70 to-black dark:from-white dark:to-white/80 p-[1px] transition duration-300 ease-in-out',\n\t\taccent: 'w-full border border-black/10 dark:border-2 dark:border-neutral-950 bg-gradient-to-b from-indigo-300/90 to-indigo-500 dark:from-indigo-200/70 dark:to-indigo-500 p-[1px] transition duration-300 ease-in-out',\n\t\tdestructive: 'w-full border border-black/10 dark:border-2 dark:border-neutral-950 bg-gradient-to-b from-red-300/90 to-red-500 p-[1px] transition duration-300 ease-in-out',\n\t\tsecondary: 'w-full border border-black/20 dark:border-2 dark:border-neutral-950 bg-white/50 dark:bg-neutral-600/50 p-[1px] transition duration-300 ease-in-out',\n\t\tminimal: 'group/texture-button w-full border border-black/20 dark:border-2 dark:border-neutral-950 bg-white/50 dark:bg-neutral-600/80 p-[1px] active:bg-neutral-200 dark:active:bg-neutral-800 hover:bg-gradient-to-t hover:from-neutral-100 hover:to-white dark:hover:from-neutral-600/50 dark:hover:to-neutral-600/70',\n\t\ticon: 'group/texture-button rounded-full border border-black/10 dark:border-neutral-950 bg-white/50 dark:bg-neutral-600/50 p-[1px] active:bg-neutral-200 dark:active:bg-neutral-800 hover:bg-gradient-to-t hover:from-neutral-100 hover:to-white dark:hover:from-neutral-700 dark:hover:to-neutral-600'\n\t};\n\tconst inner: Record<Variant, string> = {\n\t\tprimary: 'gap-2 bg-gradient-to-b from-neutral-800 to-black dark:from-neutral-200 dark:to-neutral-50 text-sm text-white/90 dark:text-black/80 transition duration-300 ease-in-out hover:from-stone-800 hover:to-neutral-800/70 dark:hover:from-stone-200 dark:hover:to-neutral-200 active:from-black active:to-black',\n\t\taccent: 'gap-2 bg-gradient-to-b from-indigo-400 to-indigo-600 text-sm text-white/90 transition duration-300 ease-in-out hover:from-indigo-400/70 hover:to-indigo-600/70 active:from-indigo-400/80 active:to-indigo-600/80',\n\t\tdestructive: 'gap-2 bg-gradient-to-b from-red-400/60 to-red-500/60 text-sm text-white/90 transition duration-300 ease-in-out hover:from-red-400/70 hover:to-red-600/70 active:from-red-400/80 active:to-red-600/80',\n\t\tsecondary: 'bg-gradient-to-b from-neutral-100/80 to-neutral-200/50 dark:from-neutral-800 dark:to-neutral-700/50 text-sm transition duration-300 ease-in-out hover:from-neutral-200/40 hover:to-neutral-300/60 dark:hover:from-neutral-700 dark:hover:to-neutral-700/60 active:from-neutral-200/60 active:to-neutral-300/70',\n\t\tminimal: 'bg-gradient-to-b from-white to-neutral-50/50 dark:from-neutral-800 dark:to-neutral-700/50 text-sm transition duration-300 ease-in-out group-hover/texture-button:from-neutral-50/50 group-hover/texture-button:to-neutral-100/60 dark:group-hover/texture-button:from-neutral-700 dark:group-hover/texture-button:to-neutral-700/60',\n\t\ticon: 'bg-gradient-to-b from-white to-neutral-50/50 dark:from-neutral-800 dark:to-neutral-700/50 rounded-full group-active/texture-button:bg-neutral-200 dark:group-active/texture-button:bg-neutral-800'\n\t};\n\tconst outerSize: Record<Size, string> = { sm: 'rounded-[6px]', default: 'rounded-[12px]', lg: 'rounded-[12px]', icon: 'rounded-full' };\n\tconst innerSize: Record<Size, string> = { sm: 'text-xs rounded-[4px] px-4 py-1', default: 'text-sm rounded-[10px] px-4 py-2', lg: 'text-base rounded-[10px] px-4 py-2', icon: 'rounded-full p-1' };\n</script>\n\n<button class={cn(outer[variant], outerSize[size], className)} {...rest}>\n\t<span class={cn('flex h-full w-full items-center justify-center text-muted-foreground', inner[variant], innerSize[size])}>\n\t\t{@render children?.()}\n\t</span>\n</button>\n",
+			"type": "registry:component",
+			"target": "ui/texture-button.svelte"
+		},
+		{
+			"content": "import { clsx, type ClassValue } from 'clsx';\nimport { twMerge } from 'tailwind-merge';\n\nexport function cn(...inputs: ClassValue[]) {\n\treturn twMerge(clsx(inputs));\n}\n",
+			"type": "registry:lib",
+			"target": "utils/cn.ts"
+		},
+		{
+			"content": "@keyframes cosmic-spin {\n\tfrom { transform: rotate(0deg); }\n\tto { transform: rotate(360deg); }\n}\n\n@keyframes cosmic-spin-slow {\n\tfrom { transform: rotate(0deg); }\n\tto { transform: rotate(-360deg); }\n}\n\n@keyframes cult-shimmer {\n\t0% { background-position: 0% 50%; }\n\t50% { background-position: 100% 50%; }\n\t100% { background-position: 0% 50%; }\n}\n\n@utility animate-cosmic-spin {\n\tanimation: cosmic-spin 3s linear infinite;\n}\n\n@utility animate-cosmic-spin-slow {\n\tanimation: cosmic-spin-slow 5s linear infinite;\n}\n\n@utility animate-cult-shimmer {\n\tanimation: cult-shimmer 8s ease infinite;\n}\n",
+			"type": "registry:file",
+			"target": "cult-ui-styles.css"
+		}
+	]
+}

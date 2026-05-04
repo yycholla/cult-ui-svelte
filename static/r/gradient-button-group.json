@@ -1,0 +1,32 @@
+{
+	"$schema": "https://shadcn-svelte.com/schema/registry-item.json",
+	"name": "gradient-button-group",
+	"title": "Gradient Button Group",
+	"type": "registry:ui",
+	"description": "A Svelte-native segmented nav control inspired by cult-ui gradient-button-group.",
+	"dependencies": [
+		"clsx",
+		"tailwind-merge"
+	],
+	"meta": {
+		"source": "https://github.com/nolly-studio/cult-ui",
+		"port": "svelte-5"
+	},
+	"files": [
+		{
+			"content": "<script lang=\"ts\">\n\timport { cn } from '$UTILS$/cn';\n\ttype Item = { id: string; label: string; icon: 'grid' | 'chart' | 'layers' | 'storage' };\n\tlet { class: className = '', items = [ { id: 'dashboard', label: 'Dashboard', icon: 'grid' }, { id: 'analytics', label: 'Analytics', icon: 'chart' }, { id: 'layers', label: 'Layers', icon: 'layers' }, { id: 'storage', label: 'Storage', icon: 'storage' } ], active = 'dashboard', dark = true }: { class?: string; items?: Item[]; active?: string; dark?: boolean } = $props();\n</script>\n\n<div class={cn('flex w-full justify-center py-1', className)}>\n\t<div class={cn('relative inline-flex items-center rounded-[28px] p-1 shadow-inner transition-colors', dark ? 'bg-[#111113] text-white' : 'bg-[#d1d1d6] text-zinc-900')}>\n\t\t<div class=\"relative z-10 flex gap-1 rounded-[24px] border border-black/10 bg-white/80 p-1 shadow-[0_8px_30px_rgba(0,0,0,0.12)] dark:border-white/5 dark:bg-[#141416]\">\n\t\t\t{#each items as item (item.id)}\n\t\t\t\t<button\n\t\t\t\t\ttype=\"button\"\n\t\t\t\t\tclass={cn('relative flex items-center gap-2 rounded-[18px] px-3 py-2 text-sm font-medium transition-all duration-200', active === item.id ? 'text-current' : dark ? 'text-zinc-500 hover:text-zinc-300' : 'text-zinc-400 hover:text-zinc-700')}\n\t\t\t\t\tonclick={() => (active = item.id)}\n\t\t\t\t>\n\t\t\t\t\t{#if active === item.id}\n\t\t\t\t\t\t<span class={cn('absolute inset-0 rounded-[18px] border shadow-sm transition-all', dark ? 'border-white/10 bg-gradient-to-b from-[#1f1f22] to-[#101012]' : 'border-black/10 bg-gradient-to-b from-white to-[#f0f0f2]')}></span>\n\t\t\t\t\t{/if}\n\t\t\t\t\t<span class=\"relative z-10 size-5\">\n\t\t\t\t\t\t{#if item.icon === 'grid'}<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><rect x=\"3\" y=\"3\" width=\"7\" height=\"7\" rx=\"1\"/><rect x=\"14\" y=\"3\" width=\"7\" height=\"7\" rx=\"1\"/><rect x=\"3\" y=\"14\" width=\"7\" height=\"7\" rx=\"1\"/><rect x=\"14\" y=\"14\" width=\"7\" height=\"7\" rx=\"1\"/></svg>{/if}\n\t\t\t\t\t\t{#if item.icon === 'chart'}<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><line x1=\"8\" y1=\"17\" x2=\"8\" y2=\"11\"/><line x1=\"12\" y1=\"17\" x2=\"12\" y2=\"7\"/><line x1=\"16\" y1=\"17\" x2=\"16\" y2=\"13\"/></svg>{/if}\n\t\t\t\t\t\t{#if item.icon === 'layers'}<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><path d=\"M12 2L2 7l10 5 10-5-10-5z\"/><path d=\"M2 17l10 5 10-5\"/><path d=\"M2 12l10 5 10-5\"/></svg>{/if}\n\t\t\t\t\t\t{#if item.icon === 'storage'}<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><path d=\"M4 4h16v6H4z\"/><path d=\"M4 14h16v6H4z\"/><circle cx=\"7\" cy=\"7\" r=\"1\" fill=\"currentColor\"/><circle cx=\"7\" cy=\"17\" r=\"1\" fill=\"currentColor\"/></svg>{/if}\n\t\t\t\t\t</span>\n\t\t\t\t\t<span class=\"relative z-10 hidden sm:inline\">{item.label}</span>\n\t\t\t\t</button>\n\t\t\t{/each}\n\t\t</div>\n\t\t<button type=\"button\" class={cn('ml-1 rounded-full p-3 transition', dark ? 'text-zinc-300 hover:bg-white/5' : 'text-zinc-700 hover:bg-black/5')} onclick={() => (dark = !dark)} aria-label=\"Toggle group theme\">\n\t\t\t{#if dark}☾{:else}☼{/if}\n\t\t</button>\n\t</div>\n</div>\n",
+			"type": "registry:component",
+			"target": "ui/gradient-button-group.svelte"
+		},
+		{
+			"content": "import { clsx, type ClassValue } from 'clsx';\nimport { twMerge } from 'tailwind-merge';\n\nexport function cn(...inputs: ClassValue[]) {\n\treturn twMerge(clsx(inputs));\n}\n",
+			"type": "registry:lib",
+			"target": "utils/cn.ts"
+		},
+		{
+			"content": "@keyframes cosmic-spin {\n\tfrom { transform: rotate(0deg); }\n\tto { transform: rotate(360deg); }\n}\n\n@keyframes cosmic-spin-slow {\n\tfrom { transform: rotate(0deg); }\n\tto { transform: rotate(-360deg); }\n}\n\n@keyframes cult-shimmer {\n\t0% { background-position: 0% 50%; }\n\t50% { background-position: 100% 50%; }\n\t100% { background-position: 0% 50%; }\n}\n\n@utility animate-cosmic-spin {\n\tanimation: cosmic-spin 3s linear infinite;\n}\n\n@utility animate-cosmic-spin-slow {\n\tanimation: cosmic-spin-slow 5s linear infinite;\n}\n\n@utility animate-cult-shimmer {\n\tanimation: cult-shimmer 8s ease infinite;\n}\n",
+			"type": "registry:file",
+			"target": "cult-ui-styles.css"
+		}
+	]
+}

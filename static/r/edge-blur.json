@@ -1,0 +1,32 @@
+{
+	"$schema": "https://shadcn-svelte.com/schema/registry-item.json",
+	"name": "edge-blur",
+	"title": "Edge Blur",
+	"type": "registry:ui",
+	"description": "A utility gradient/blur overlay for fading card or viewport edges.",
+	"dependencies": [
+		"clsx",
+		"tailwind-merge"
+	],
+	"meta": {
+		"source": "https://github.com/nolly-studio/cult-ui",
+		"port": "svelte-5"
+	},
+	"files": [
+		{
+			"content": "<script lang=\"ts\">\n\timport { cn } from '$UTILS$/cn';\n\tlet { class: className = '', position = 'bottom', size = 'h-24' }: { class?: string; position?: 'top' | 'bottom' | 'left' | 'right'; size?: string } = $props();\n\tconst pos = { top: 'inset-x-0 top-0 bg-gradient-to-b', bottom: 'inset-x-0 bottom-0 bg-gradient-to-t', left: 'inset-y-0 left-0 bg-gradient-to-r w-24', right: 'inset-y-0 right-0 bg-gradient-to-l w-24' } as const;\n</script>\n\n<div class={cn('pointer-events-none absolute z-10 from-background via-background/80 to-transparent backdrop-blur-[2px]', position === 'left' || position === 'right' ? '' : size, pos[position], className)}></div>\n",
+			"type": "registry:component",
+			"target": "ui/edge-blur.svelte"
+		},
+		{
+			"content": "import { clsx, type ClassValue } from 'clsx';\nimport { twMerge } from 'tailwind-merge';\n\nexport function cn(...inputs: ClassValue[]) {\n\treturn twMerge(clsx(inputs));\n}\n",
+			"type": "registry:lib",
+			"target": "utils/cn.ts"
+		},
+		{
+			"content": "@keyframes cosmic-spin {\n\tfrom { transform: rotate(0deg); }\n\tto { transform: rotate(360deg); }\n}\n\n@keyframes cosmic-spin-slow {\n\tfrom { transform: rotate(0deg); }\n\tto { transform: rotate(-360deg); }\n}\n\n@keyframes cult-shimmer {\n\t0% { background-position: 0% 50%; }\n\t50% { background-position: 100% 50%; }\n\t100% { background-position: 0% 50%; }\n}\n\n@utility animate-cosmic-spin {\n\tanimation: cosmic-spin 3s linear infinite;\n}\n\n@utility animate-cosmic-spin-slow {\n\tanimation: cosmic-spin-slow 5s linear infinite;\n}\n\n@utility animate-cult-shimmer {\n\tanimation: cult-shimmer 8s ease infinite;\n}\n",
+			"type": "registry:file",
+			"target": "cult-ui-styles.css"
+		}
+	]
+}

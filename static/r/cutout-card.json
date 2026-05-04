@@ -1,0 +1,32 @@
+{
+	"$schema": "https://shadcn-svelte.com/schema/registry-item.json",
+	"name": "cutout-card",
+	"title": "Cutout Card",
+	"type": "registry:ui",
+	"description": "A layered paper-cut card treatment with clipped-corner visual depth.",
+	"dependencies": [
+		"clsx",
+		"tailwind-merge"
+	],
+	"meta": {
+		"source": "https://github.com/nolly-studio/cult-ui",
+		"port": "svelte-5"
+	},
+	"files": [
+		{
+			"content": "<script lang=\"ts\">\n\timport type { Snippet } from 'svelte';\n\timport { cn } from '$UTILS$/cn';\n\tlet { class: className = '', children, title = 'Cutout Card', description = 'Layered paper texture with clipped corners.' }: { class?: string; children?: Snippet; title?: string; description?: string } = $props();\n</script>\n\n<div class={cn('relative overflow-hidden rounded-3xl border border-black/10 bg-neutral-100 p-1 shadow-sm dark:border-white/10 dark:bg-neutral-900', className)}>\n\t<div class=\"pointer-events-none absolute -right-12 -top-12 size-32 rounded-full bg-background shadow-[0_0_0_999px_rgba(0,0,0,0.03)] dark:shadow-[0_0_0_999px_rgba(255,255,255,0.03)]\"></div>\n\t<div class=\"relative rounded-[1.35rem] border border-black/5 bg-white p-6 dark:border-white/10 dark:bg-neutral-950\">\n\t\t<div class=\"absolute right-3 top-3 size-10 rounded-bl-3xl bg-neutral-100 dark:bg-neutral-900\"></div>\n\t\t{#if children}\n\t\t\t{@render children()}\n\t\t{:else}\n\t\t\t<h3 class=\"text-lg font-semibold text-neutral-950 dark:text-white\">{title}</h3>\n\t\t\t<p class=\"mt-2 max-w-sm text-sm text-neutral-500 dark:text-neutral-400\">{description}</p>\n\t\t{/if}\n\t</div>\n</div>\n",
+			"type": "registry:component",
+			"target": "ui/cutout-card.svelte"
+		},
+		{
+			"content": "import { clsx, type ClassValue } from 'clsx';\nimport { twMerge } from 'tailwind-merge';\n\nexport function cn(...inputs: ClassValue[]) {\n\treturn twMerge(clsx(inputs));\n}\n",
+			"type": "registry:lib",
+			"target": "utils/cn.ts"
+		},
+		{
+			"content": "@keyframes cosmic-spin {\n\tfrom { transform: rotate(0deg); }\n\tto { transform: rotate(360deg); }\n}\n\n@keyframes cosmic-spin-slow {\n\tfrom { transform: rotate(0deg); }\n\tto { transform: rotate(-360deg); }\n}\n\n@keyframes cult-shimmer {\n\t0% { background-position: 0% 50%; }\n\t50% { background-position: 100% 50%; }\n\t100% { background-position: 0% 50%; }\n}\n\n@utility animate-cosmic-spin {\n\tanimation: cosmic-spin 3s linear infinite;\n}\n\n@utility animate-cosmic-spin-slow {\n\tanimation: cosmic-spin-slow 5s linear infinite;\n}\n\n@utility animate-cult-shimmer {\n\tanimation: cult-shimmer 8s ease infinite;\n}\n",
+			"type": "registry:file",
+			"target": "cult-ui-styles.css"
+		}
+	]
+}

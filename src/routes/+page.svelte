@@ -1,7 +1,11 @@
 <script lang="ts">
 	import {
 		AnimatedNumber,
+		BgAnimateButton,
+		BorderBeamButton,
+		BorderBeamIconButton,
 		CosmicButton,
+		CutoutCard,
 		DitherImage,
 		DitherImageCaption,
 		DitherImageContent,
@@ -11,7 +15,9 @@
 		Dock,
 		DockItem,
 		DynamicIsland,
+		EdgeBlur,
 		GlowButton,
+		GradientButtonGroup,
 		GradientHeading,
 		MinimalCard,
 		MinimalCardContent,
@@ -19,7 +25,12 @@
 		MinimalCardFooter,
 		MinimalCardImage,
 		MinimalCardTitle,
-		MockBrowserWindow
+		MockBrowserWindow,
+		NeumorphButton,
+		NeumorphEyebrow,
+		SquiggleArrow,
+		TextureButton,
+		TextureCard
 	} from '$lib';
 
 	let islandPreset = $state<'default' | 'compact' | 'medium' | 'tall'>('default');
@@ -69,9 +80,37 @@
 			</MinimalCardContent>
 			<MinimalCardFooter>
 				<span class="text-sm text-slate-400">Components ported</span>
-				<strong><AnimatedNumber value={20} /></strong>
+				<strong><AnimatedNumber value={31} /></strong>
 			</MinimalCardFooter>
 		</MinimalCard>
+	</section>
+
+	<section class="grid gap-8 lg:grid-cols-2">
+		<div class="space-y-5 rounded-3xl border border-white/10 bg-white/[0.03] p-6">
+			<NeumorphEyebrow>New batch</NeumorphEyebrow>
+			<GradientHeading as="h2" size="lg">Buttons and controls</GradientHeading>
+			<div class="flex flex-wrap items-center gap-3">
+				<BgAnimateButton gradient="nebula">Animated BG</BgAnimateButton>
+				<TextureButton variant="accent">Texture</TextureButton>
+				<NeumorphButton intent="primary">Neumorph</NeumorphButton>
+				<BorderBeamButton>Border Beam</BorderBeamButton>
+				<BorderBeamIconButton aria-label="Spark">✦</BorderBeamIconButton>
+			</div>
+			<GradientButtonGroup />
+		</div>
+
+		<div class="relative space-y-5 overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] p-6">
+			<EdgeBlur />
+			<GradientHeading as="h2" size="lg">Cards and decorative pieces</GradientHeading>
+			<div class="grid gap-4 sm:grid-cols-2">
+				<CutoutCard title="Cutout" description="Paper-cut card treatment." />
+				<TextureCard title="Texture" description="Grain, border, and gradient surface." />
+			</div>
+			<div class="flex items-center gap-4 text-lime-200">
+				<SquiggleArrow />
+				<span class="text-sm text-slate-300">Svelte-native decorative SVG</span>
+			</div>
+		</div>
 	</section>
 
 	<section class="grid gap-8 lg:grid-cols-2">
@@ -144,7 +183,8 @@
 	</section>
 
 	<section class="rounded-3xl border border-lime-300/20 bg-lime-300/[0.04] p-6 text-sm leading-7 text-slate-300">
-		<strong class="text-lime-200">Port status:</strong> first Svelte-native slice includes buttons,
-		headings, cards, browser window, animated number, dither image, dock, and dynamic island.
+		<strong class="text-lime-200">Port status:</strong> Svelte-native slice includes buttons,
+		headings, cards, browser window, animated number, dither image, dock, dynamic island,
+		gradient controls, decorative SVG, and texture/neumorph surfaces.
 	</section>
 </main>

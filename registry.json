@@ -388,6 +388,376 @@
 				"port": "svelte-5"
 			},
 			"registryDependencies": []
+		},
+		{
+			"name": "bg-animate-button",
+			"type": "registry:ui",
+			"title": "BG Animate Button",
+			"description": "A button with an animated conic-gradient background shell.",
+			"dependencies": [
+				"clsx",
+				"tailwind-merge"
+			],
+			"registryDependencies": [],
+			"files": [
+				{
+					"path": "src/lib/components/BgAnimateButton.svelte",
+					"target": "ui/bg-animate-button.svelte",
+					"type": "registry:component"
+				},
+				{
+					"path": "src/lib/utils/cn.ts",
+					"target": "utils/cn.ts",
+					"type": "registry:lib"
+				},
+				{
+					"path": "src/lib/styles.css",
+					"target": "cult-ui-styles.css",
+					"type": "registry:file"
+				}
+			],
+			"docs": "Import the generated cult-ui-styles.css from your app stylesheet (for example: `@import '$lib/components/ui/cult-ui-styles.css';`) if your bundler does not include registry CSS files automatically.",
+			"categories": [
+				"button",
+				"animation"
+			],
+			"meta": {
+				"source": "https://github.com/nolly-studio/cult-ui",
+				"port": "svelte-5"
+			}
+		},
+		{
+			"name": "border-beam-button",
+			"type": "registry:ui",
+			"title": "Border Beam Button",
+			"description": "A button with a rotating border beam, implemented without external border-beam dependencies.",
+			"dependencies": [
+				"clsx",
+				"tailwind-merge"
+			],
+			"registryDependencies": [],
+			"files": [
+				{
+					"path": "src/lib/components/BorderBeamButton.svelte",
+					"target": "ui/border-beam-button.svelte",
+					"type": "registry:component"
+				},
+				{
+					"path": "src/lib/components/BorderBeamIconButton.svelte",
+					"target": "ui/border-beam-icon-button.svelte",
+					"type": "registry:component"
+				},
+				{
+					"path": "src/lib/utils/cn.ts",
+					"target": "utils/cn.ts",
+					"type": "registry:lib"
+				},
+				{
+					"path": "src/lib/styles.css",
+					"target": "cult-ui-styles.css",
+					"type": "registry:file"
+				}
+			],
+			"docs": "Import the generated cult-ui-styles.css from your app stylesheet (for example: `@import '$lib/components/ui/cult-ui-styles.css';`) if your bundler does not include registry CSS files automatically.",
+			"categories": [
+				"button",
+				"animation"
+			],
+			"meta": {
+				"source": "https://github.com/nolly-studio/cult-ui",
+				"port": "svelte-5"
+			}
+		},
+		{
+			"name": "texture-button",
+			"type": "registry:ui",
+			"title": "Texture Button",
+			"description": "A layered textured button with multiple visual variants.",
+			"dependencies": [
+				"clsx",
+				"tailwind-merge"
+			],
+			"registryDependencies": [],
+			"files": [
+				{
+					"path": "src/lib/components/TextureButton.svelte",
+					"target": "ui/texture-button.svelte",
+					"type": "registry:component"
+				},
+				{
+					"path": "src/lib/utils/cn.ts",
+					"target": "utils/cn.ts",
+					"type": "registry:lib"
+				},
+				{
+					"path": "src/lib/styles.css",
+					"target": "cult-ui-styles.css",
+					"type": "registry:file"
+				}
+			],
+			"docs": "Import the generated cult-ui-styles.css from your app stylesheet (for example: `@import '$lib/components/ui/cult-ui-styles.css';`) if your bundler does not include registry CSS files automatically.",
+			"categories": [
+				"button"
+			],
+			"meta": {
+				"source": "https://github.com/nolly-studio/cult-ui",
+				"port": "svelte-5"
+			}
+		},
+		{
+			"name": "neumorph-button",
+			"type": "registry:ui",
+			"title": "Neumorph Button",
+			"description": "A tactile neumorphic button with loading state and intent variants.",
+			"dependencies": [
+				"clsx",
+				"tailwind-merge"
+			],
+			"registryDependencies": [],
+			"files": [
+				{
+					"path": "src/lib/components/NeumorphButton.svelte",
+					"target": "ui/neumorph-button.svelte",
+					"type": "registry:component"
+				},
+				{
+					"path": "src/lib/utils/cn.ts",
+					"target": "utils/cn.ts",
+					"type": "registry:lib"
+				},
+				{
+					"path": "src/lib/styles.css",
+					"target": "cult-ui-styles.css",
+					"type": "registry:file"
+				}
+			],
+			"docs": "Import the generated cult-ui-styles.css from your app stylesheet (for example: `@import '$lib/components/ui/cult-ui-styles.css';`) if your bundler does not include registry CSS files automatically.",
+			"categories": [
+				"button"
+			],
+			"meta": {
+				"source": "https://github.com/nolly-studio/cult-ui",
+				"port": "svelte-5"
+			}
+		},
+		{
+			"name": "gradient-button-group",
+			"type": "registry:ui",
+			"title": "Gradient Button Group",
+			"description": "A Svelte-native segmented nav control inspired by cult-ui gradient-button-group.",
+			"dependencies": [
+				"clsx",
+				"tailwind-merge"
+			],
+			"registryDependencies": [],
+			"files": [
+				{
+					"path": "src/lib/components/GradientButtonGroup.svelte",
+					"target": "ui/gradient-button-group.svelte",
+					"type": "registry:component"
+				},
+				{
+					"path": "src/lib/utils/cn.ts",
+					"target": "utils/cn.ts",
+					"type": "registry:lib"
+				},
+				{
+					"path": "src/lib/styles.css",
+					"target": "cult-ui-styles.css",
+					"type": "registry:file"
+				}
+			],
+			"docs": "Import the generated cult-ui-styles.css from your app stylesheet (for example: `@import '$lib/components/ui/cult-ui-styles.css';`) if your bundler does not include registry CSS files automatically.",
+			"categories": [
+				"navigation",
+				"button"
+			],
+			"meta": {
+				"source": "https://github.com/nolly-studio/cult-ui",
+				"port": "svelte-5"
+			}
+		},
+		{
+			"name": "cutout-card",
+			"type": "registry:ui",
+			"title": "Cutout Card",
+			"description": "A layered paper-cut card treatment with clipped-corner visual depth.",
+			"dependencies": [
+				"clsx",
+				"tailwind-merge"
+			],
+			"registryDependencies": [],
+			"files": [
+				{
+					"path": "src/lib/components/CutoutCard.svelte",
+					"target": "ui/cutout-card.svelte",
+					"type": "registry:component"
+				},
+				{
+					"path": "src/lib/utils/cn.ts",
+					"target": "utils/cn.ts",
+					"type": "registry:lib"
+				},
+				{
+					"path": "src/lib/styles.css",
+					"target": "cult-ui-styles.css",
+					"type": "registry:file"
+				}
+			],
+			"docs": "Import the generated cult-ui-styles.css from your app stylesheet (for example: `@import '$lib/components/ui/cult-ui-styles.css';`) if your bundler does not include registry CSS files automatically.",
+			"categories": [
+				"card"
+			],
+			"meta": {
+				"source": "https://github.com/nolly-studio/cult-ui",
+				"port": "svelte-5"
+			}
+		},
+		{
+			"name": "texture-card",
+			"type": "registry:ui",
+			"title": "Texture Card",
+			"description": "A subtle grain, border, and gradient card surface.",
+			"dependencies": [
+				"clsx",
+				"tailwind-merge"
+			],
+			"registryDependencies": [],
+			"files": [
+				{
+					"path": "src/lib/components/TextureCard.svelte",
+					"target": "ui/texture-card.svelte",
+					"type": "registry:component"
+				},
+				{
+					"path": "src/lib/utils/cn.ts",
+					"target": "utils/cn.ts",
+					"type": "registry:lib"
+				},
+				{
+					"path": "src/lib/styles.css",
+					"target": "cult-ui-styles.css",
+					"type": "registry:file"
+				}
+			],
+			"docs": "Import the generated cult-ui-styles.css from your app stylesheet (for example: `@import '$lib/components/ui/cult-ui-styles.css';`) if your bundler does not include registry CSS files automatically.",
+			"categories": [
+				"card"
+			],
+			"meta": {
+				"source": "https://github.com/nolly-studio/cult-ui",
+				"port": "svelte-5"
+			}
+		},
+		{
+			"name": "neumorph-eyebrow",
+			"type": "registry:ui",
+			"title": "Neumorph Eyebrow",
+			"description": "A small tactile pill label for headings and callouts.",
+			"dependencies": [
+				"clsx",
+				"tailwind-merge"
+			],
+			"registryDependencies": [],
+			"files": [
+				{
+					"path": "src/lib/components/NeumorphEyebrow.svelte",
+					"target": "ui/neumorph-eyebrow.svelte",
+					"type": "registry:component"
+				},
+				{
+					"path": "src/lib/utils/cn.ts",
+					"target": "utils/cn.ts",
+					"type": "registry:lib"
+				},
+				{
+					"path": "src/lib/styles.css",
+					"target": "cult-ui-styles.css",
+					"type": "registry:file"
+				}
+			],
+			"docs": "Import the generated cult-ui-styles.css from your app stylesheet (for example: `@import '$lib/components/ui/cult-ui-styles.css';`) if your bundler does not include registry CSS files automatically.",
+			"categories": [
+				"typography",
+				"badge"
+			],
+			"meta": {
+				"source": "https://github.com/nolly-studio/cult-ui",
+				"port": "svelte-5"
+			}
+		},
+		{
+			"name": "edge-blur",
+			"type": "registry:ui",
+			"title": "Edge Blur",
+			"description": "A utility gradient/blur overlay for fading card or viewport edges.",
+			"dependencies": [
+				"clsx",
+				"tailwind-merge"
+			],
+			"registryDependencies": [],
+			"files": [
+				{
+					"path": "src/lib/components/EdgeBlur.svelte",
+					"target": "ui/edge-blur.svelte",
+					"type": "registry:component"
+				},
+				{
+					"path": "src/lib/utils/cn.ts",
+					"target": "utils/cn.ts",
+					"type": "registry:lib"
+				},
+				{
+					"path": "src/lib/styles.css",
+					"target": "cult-ui-styles.css",
+					"type": "registry:file"
+				}
+			],
+			"docs": "Import the generated cult-ui-styles.css from your app stylesheet (for example: `@import '$lib/components/ui/cult-ui-styles.css';`) if your bundler does not include registry CSS files automatically.",
+			"categories": [
+				"effect"
+			],
+			"meta": {
+				"source": "https://github.com/nolly-studio/cult-ui",
+				"port": "svelte-5"
+			}
+		},
+		{
+			"name": "squiggle-arrow",
+			"type": "registry:ui",
+			"title": "Squiggle Arrow",
+			"description": "A hand-drawn SVG squiggle arrow with direction variants.",
+			"dependencies": [
+				"clsx",
+				"tailwind-merge"
+			],
+			"registryDependencies": [],
+			"files": [
+				{
+					"path": "src/lib/components/SquiggleArrow.svelte",
+					"target": "ui/squiggle-arrow.svelte",
+					"type": "registry:component"
+				},
+				{
+					"path": "src/lib/utils/cn.ts",
+					"target": "utils/cn.ts",
+					"type": "registry:lib"
+				},
+				{
+					"path": "src/lib/styles.css",
+					"target": "cult-ui-styles.css",
+					"type": "registry:file"
+				}
+			],
+			"docs": "Import the generated cult-ui-styles.css from your app stylesheet (for example: `@import '$lib/components/ui/cult-ui-styles.css';`) if your bundler does not include registry CSS files automatically.",
+			"categories": [
+				"svg",
+				"decorative"
+			],
+			"meta": {
+				"source": "https://github.com/nolly-studio/cult-ui",
+				"port": "svelte-5"
+			}
 		}
 	]
 }

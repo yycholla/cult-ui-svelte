@@ -15,6 +15,16 @@ This is **not** a React wrapper. Components are Svelte-native and use runes, sni
 - `DitherImage` compound set
 - `Dock` / `DockItem`
 - `DynamicIsland`
+- `BgAnimateButton`
+- `BorderBeamButton` / `BorderBeamIconButton`
+- `TextureButton`
+- `NeumorphButton`
+- `GradientButtonGroup`
+- `CutoutCard`
+- `TextureCard`
+- `NeumorphEyebrow`
+- `EdgeBlur`
+- `SquiggleArrow`
 
 ## Usage
 
@@ -57,6 +67,16 @@ Available registry items:
 - `dither-image`
 - `dock`
 - `dynamic-island`
+- `bg-animate-button`
+- `border-beam-button`
+- `texture-button`
+- `neumorph-button`
+- `gradient-button-group`
+- `cutout-card`
+- `texture-card`
+- `neumorph-eyebrow`
+- `edge-blur`
+- `squiggle-arrow`
 
 Registry installs copy source into your app, normally under `src/lib/components/ui/`, and copy `cn.ts` into `src/lib/utils/cn.ts`.
 
